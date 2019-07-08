@@ -1,0 +1,31 @@
+/* WordItem */
+.wordItem_li {
+    padding: 1em;
+    background-color: rgba(145, 243, 197, 0.5);
+    margin-bottom: .2em;
+    list-style-type: none;
+    font-weight: 500;
+    font-size: 1.2rem;
+    text-shadow: -1px 1px 1px rgba(0,0,0,0.2);
+    text-transform: capitalize;
+}
+
+.wordItem_li:hover {
+    cursor: pointer;
+}
+
+/* WordPreview */
+.wordPreview_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    width: 120px;
+    border-radius: 5px;
+    background: #000;
+}
+
+.wordPreview_img {
+    width: 100px;
+    height: 100px;
+}

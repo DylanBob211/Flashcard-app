@@ -1,0 +1,35 @@
+Questa applicazione avra' uno scopo molto semplice: caricare una lista di parole, per poi far partire una schermata diapositiva dove queste parole sono mostrate una alla volta come delle flashcard. Ogni flashcard ha un immagine relativa automaticamente caricata da google al momento della creazione della lista. Si potranno fare diversi giochi con queste flashcard. 
+
+Componenti:
+App
+	Liste
+		map:oggetto lista
+			map:oggetto parola
+				-rimuovi parola
+				-trova URL immagine (fetch da sito)
+			-aggiungi parola		
+			-show more/show less
+			esercitati	
+	-crea oggetto lista
+		
+		 
+
+Descrizione dei componenti:
+App -> contiene i vari elementi
+
+Liste -> contiene le varie liste di parole da esercitare
+queste liste devono avere un nome
+esercitati su queste liste
+contiene la funzione per aggiungere una nuova lista di parole che chiede esclusivamente di specificare un nome
+
+oggetto lista -> sottocomponente di Liste,
+contiene tutti gli oggetti parola inerenti da studiare
+contiene la funzione per visualizzare tutti gli elementi della lista, o solo i primi che entrano
+contiene una funzione per aggiungere nuove parole nella lista, questa richiede una parola e una traduzione. Una volta utilizzata questa va a fetchare un'immagine correlata tramite un API
+
+oggetto parola -> sottocomponente di Oggetto Lista
+contine un elemento testuale con la traduzione nella lingua desiderata e un immagine correlata  
+
+[esercitati] -> componente che prende tutti gli elementi di una lista e li fa partire in sequenza random
+ 
+		

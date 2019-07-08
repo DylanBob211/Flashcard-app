@@ -1,0 +1,64 @@
+.listForm_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background-color: var(--primary-color);
+    border-radius: 30px 30px 0 0;
+    box-shadow: -9px 17px 21px -16px rgba(0,0,0,0.49);
+    color: #fff;
+}
+
+.listForm_input {
+    max-width: 50%;
+    margin-left: 2rem;
+    height: 1.6rem;
+    font-size: 1.5rem;
+    border: 2px solid black;
+
+}
+
+.listForm_btn {
+    height: 2rem;
+    background: #fff;
+    margin-left: 10px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    margin-top: .5rem;
+    transition: .2s ease-in-out all;
+    cursor: pointer;
+}
+
+.listForm_btn:hover{
+    background: #ccc;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .listForm_container { 
+        flex-direction: column;  
+        
+    }
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+   
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    
+}
