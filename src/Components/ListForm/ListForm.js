@@ -9,8 +9,13 @@ const ListForm = ({addNewList}) => {
 
     const createNewList = (e) => {
         e.preventDefault();
-        addNewList(newList)
-        setNewList({name : ''})
+        if(!newList.name){
+            console.warn('insert a name for the list')
+        } else {
+            addNewList(newList)
+            setNewList({name : ''})
+        }
+        
     }
 
     const handleChange = e => {
