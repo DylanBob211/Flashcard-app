@@ -13,7 +13,6 @@ const WordItem = ({name, picUrl}) => {
         setMousePosition({mouseX : e.clientX, mouseY: e.clientY })
     }
 
-
     return (
         <div onMouseOver={e => handleMouseOver(e)} onMouseOut={e => handleMouseOver(e)} onMouseMove={e => handleMouseMove(e)}>
             <WordPreview picUrl={picUrl} isMouseOver={ isMouseOver } mousePosition={ mousePosition }/>
