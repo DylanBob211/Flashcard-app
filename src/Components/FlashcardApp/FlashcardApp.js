@@ -12,14 +12,18 @@ const FlashcardApp = () => {
       ])
     
     const addNewList = (newList) => {
-    setLists(state => ([...state, newList]))
+        setLists(state => ([...state, newList]))
+    }
+
+    const deleteList = listName => {
+        setLists(state => ([...state.filter(element => element.name !== listName)]))
     }
 
 
     return (
         <div>
             <ListForm addNewList={addNewList} />
-            <Lists lists={lists}/>
+            <Lists deleteList={deleteList} lists={lists}/>
         </div>
     )
 }

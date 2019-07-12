@@ -15,7 +15,7 @@ const WordItem = ({name, picUrl}) => {
 
     return (
         <div onMouseOver={e => handleMouseOver(e)} onMouseOut={e => handleMouseOver(e)} onMouseMove={e => handleMouseMove(e)}>
-            <WordPreview picUrl={picUrl} isMouseOver={ isMouseOver } mousePosition={ mousePosition }/>
+            <WordPreview name={ name } picUrl={picUrl} isMouseOver={ isMouseOver } mousePosition={ mousePosition }/>
             <li className="wordItem_li">{name}</li>        
         </div>
     )
@@ -23,20 +23,18 @@ const WordItem = ({name, picUrl}) => {
 
 export default WordItem
 
-const WordPreview = ({ picUrl, isMouseOver, mousePosition }) => {
+const WordPreview = ({ picUrl, isMouseOver, mousePosition, name }) => {
 
     const dinamicStyle = {
-        position : 'absolute',
-        left: `${mousePosition.mouseX}px`,
-        top: `${mousePosition.mouseY}px`,
-        transition: isMouseOver ? '.3s transform' : '.1s transform',
-        transform: isMouseOver ? 'scale(1)' : 'scale(0)',
-        transformOrigin: 'top left', 
-        opacity: '0.7'
+
+        transition: isMouseOver ? '.3s transform .6s' : '.1s transform',
+        transform: isMouseOver ? 'scale(1) translate(10%, -101%)' : 'scale(0)',
+        transformOrigin: 'top'
     }
 
     return (
     <div className="wordPreview_container" style={dinamicStyle}>
+        <h3 className="wordPreview_title">{ name }</h3>
         { picUrl === "No Img Available" ? <img className="wordPreview_img" src={ require('../../Assets/imgs/abs.jpg') } alt="word preview"/> : <img className="wordPreview_img" src={ picUrl } alt="word preview" />}
     </div>
     )

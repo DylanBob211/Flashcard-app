@@ -1,0 +1,86 @@
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
+.loginCard_container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    background: var(--primary-color);
+    border-radius: 10px;
+    padding: 2rem;
+    color: #fff;
+}
+
+.loginCard_welcome {
+    text-align: center;
+    font-size: 4rem;
+}
+
+.loginCard_form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginCard_select{
+    width: 8em;
+    height: 2em;    
+    border: 1px solid var(--second-shade);
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: center;
+    background: var(--third-shade-secondary);
+    transition: all .2s;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.loginCard_select option {
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.loginCard_select:focus{
+    outline: none;
+    background: var(--secondary-color);
+}
+
+.loginCard_select:hover{
+    background: var(--first-shade-secondary);
+}
+
+.loginCard_button{
+    height: 3em;
+    width: 6em;
+    cursor: pointer;
+    margin-left: 2em;
+    border-radius: 5px;
+    
+    padding: .6em;
+    transition: all .2s;
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+.loginCard_button--primary{
+    background: var(--third-shade-secondary);
+}
+
+.loginCard_button--primary:hover{
+    background: var(--secondary-color);
+}
+
+.loginCard_button--secondary{
+    background: var(--clashing-color);
+}
+
+.loginCard_button--secondary:hover{
+    background: var(--second-shade-clashing)
+}

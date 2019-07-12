@@ -3,6 +3,23 @@
   --first-shade : #192a81;
   --second-shade : #30408e;
   --third-shade : #4c599a;
+
+  --secondary-color: #61c0b0;
+  --first-shade-secondary: #49ccb6;
+  --second-shade-secondary: #2dd9bc;
+  --third-shade-secondary: #0de6c2;;
+
+  --clashing-color: #ff6666;
+  --first-shade-clashing: #ff8080;
+  --second-shade-clashing: #ff9999;
+  --third-shade-clashing: #ffcccc;
+}
+
+*:focus{
+  outline: none;
+}
+input:focus{
+  outline: 1px solid #fff;
 }
 
 body {

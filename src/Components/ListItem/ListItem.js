@@ -7,21 +7,16 @@ import TrashBinIcon from '../Icons/TrashBinIcon';
 import PlayIcon from '../Icons/PlayIcon'
 
 
-const ListItem = ({ wordsArray, listName}) => {
+const ListItem = ({ wordsArray, listName, deleteList }) => {
     
     const [words, setWords] = useState(wordsArray)
 
-    const [isExpanded, setExpanded] = useState(false)
-
-    useEffect(() => {
-        console.log(words)
-    }, [words])
-
+    const [isExpanded, setExpanded] = useState(false) //TODO: finish
          
     const listOfWords = words.map((word, index) => (<WordItem name={word.word} picUrl={word.url} key={index}/>))
 
     return (<div className="listItem_container" >
-                <ListHeader listName={ listName } />
+                <ListHeader listName={ listName } deleteList={ deleteList }/>
                 <ul className="listItem_wordList">{ listOfWords }</ul> 
                 <WordForm addWord={ addWord } dependency ={ setWords }/>
             </div>)
@@ -29,13 +24,13 @@ const ListItem = ({ wordsArray, listName}) => {
     
 }
 
-const ListHeader = ({listName}) => {
+const ListHeader = ({listName, deleteList }) => {
     
     return (
     <div className="listItem_header_container">
         <h2 className="listItem_title">{ listName }</h2>
         <div className="listItem_iconbox">
-            <TrashBinIcon class="listItem_icon--trashbin"/>
+            <TrashBinIcon function={deleteList} dependencies={listName} class="listItem_icon--trashbin"/>
             <PlayIcon class="listItem_icon--play" />
         </div>
     </div>

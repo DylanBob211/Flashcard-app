@@ -9,30 +9,34 @@
     color: #fff;
 }
 
+.listForm_input-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .listForm_input {
     max-width: 50%;
     margin-left: 2rem;
     height: 1.6rem;
     font-size: 1.5rem;
-    border: 2px solid black;
-
+    padding: .2em;
 }
 
 .listForm_btn {
+    margin-left: .5em;
     height: 2rem;
-    background: #fff;
-    margin-left: 10px;
+    background: var(--secondary-color);
     border-radius: 5px;
     font-weight: 600;
     font-size: 1rem;
     border: none;
-    margin-top: .5rem;
     transition: .2s ease-in-out all;
     cursor: pointer;
 }
 
 .listForm_btn:hover{
-    background: #ccc;
+    background: var(--third-shade-secondary)
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -42,7 +46,6 @@
         
     }
 } 
-
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     

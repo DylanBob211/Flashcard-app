@@ -1,7 +1,7 @@
 /* WordItem */
 .wordItem_li {
     padding: 1em;
-    background-color: rgba(145, 243, 197, 0.5);
+    background-color: var(--third-shade-secondary);
     margin-bottom: .2em;
     list-style-type: none;
     font-weight: 500;
@@ -17,15 +17,27 @@
 /* WordPreview */
 .wordPreview_container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
     align-items: center;
-    height: 120px;
-    width: 120px;
+    height: 300px;
+    width: 200px;
     border-radius: 5px;
     background: #000;
+    padding: .7em;
+    opacity: .9;
+    z-index: 3;
+    
+    position: absolute;
+}
+
+.wordPreview_title{
+    color: #fff;
+    text-transform: capitalize;
 }
 
 .wordPreview_img {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
 }

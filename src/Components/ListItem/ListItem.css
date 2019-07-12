@@ -39,12 +39,12 @@
 }
 
 .listItem_icon--trashbin:hover {
-    fill: #ccc;
+    fill: var(--first-shade-clashing);
     cursor: pointer;
 }
 
 .listItem_icon--play:hover {
-    fill: #ccc;
+    fill: var(--second-shade-secondary);
     cursor: pointer;
 }
 

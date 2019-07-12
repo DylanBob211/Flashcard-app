@@ -2,12 +2,12 @@ import React, {useState} from 'react'
 import ListItem from '../ListItem'
 import './Lists.css'
 
-const Lists = ({lists}) => {
+const Lists = ({lists, deleteList}) => {
     
     return (
         <div className="lists">
             {lists.map((listItem, index) => (
-                <ListItem key={ index } listName={ listItem.name } wordsArray={ listItem.parole } />                
+                <ListItem deleteList={deleteList} key={ index } listName={ listItem.name } wordsArray={ listItem.parole } />                
             ))}
         </div>
     )
