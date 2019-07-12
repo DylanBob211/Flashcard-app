@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './WordItem.css'
 
-const WordItem = ({name, picUrl}) => {
+const WordItem = ({name, picUrl, deleteWord, dependency}) => {
     
     const [isMouseOver, setMouseOver] = useState(false)
     const [mousePosition, setMousePosition] = useState({mouseX : 0, mouseY: 0})
@@ -16,7 +16,8 @@ const WordItem = ({name, picUrl}) => {
     return (
         <div onMouseOver={e => handleMouseOver(e)} onMouseOut={e => handleMouseOver(e)} onMouseMove={e => handleMouseMove(e)}>
             <WordPreview name={ name } picUrl={picUrl} isMouseOver={ isMouseOver } mousePosition={ mousePosition }/>
-            <li className="wordItem_li">{name}</li>        
+            <li className="wordItem_li">{name}</li>
+            <button onClick={e => deleteWord(name, dependency)}>removeWord</button>        
         </div>
     )
 }

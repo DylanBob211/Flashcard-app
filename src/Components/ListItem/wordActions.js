@@ -5,7 +5,7 @@ const unsplash = new Unsplash({
     applicationId: "66c8f4bbdcd250ba88db15412fb4cf728a9a8c4db261db2a356b22a1365aa20a"
 });
 
-const addWord = (word, setWords) => {
+export const addWord = (word, setWords) => {
     if(!word) {
         console.warn('Inserisci una parola')
     } else {
@@ -36,6 +36,10 @@ const addWord = (word, setWords) => {
         
 }
 
+export const deleteWord = (wordName, setWords) => {
+    setWords(state => ([...state.filter(element => element.word !== wordName)]))
+}
+
 const translateWord = word => {
         
     axios.post('http://localhost:5000/', {
@@ -47,4 +51,3 @@ const translateWord = word => {
     
 }   
 
-export default addWord

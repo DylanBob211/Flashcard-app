@@ -5,7 +5,7 @@ import './Lists.css'
 const Lists = ({lists, deleteList}) => {
     
     return (
-        <div className="lists">
+        <div className="lists_container">
             {lists.map((listItem, index) => (
                 <ListItem deleteList={deleteList} key={ index } listName={ listItem.name } wordsArray={ listItem.parole } />                
             ))}
