@@ -2,12 +2,12 @@ import React, {useState} from 'react'
 import './WordForm.css'
 
 
-const WordForm = ({addWord, dependency }) => {
+const WordForm = ({addWord, id}) => {
     const [newWord, setNewWord] = useState('')
 
     const createNewList = (e) => {
         e.preventDefault();
-        addWord(newWord, dependency)
+        addWord(newWord, id)
         setNewWord('')
     }
 

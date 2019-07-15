@@ -4,7 +4,7 @@ const request = require("request");
 
 const app = express()
 
-const URL = 'https://translate.yandex.net/api/v1.5/tr/translate'
+const URL = 'https://translate.yandex.net/api/v1.5/tr.json/translate'
 const key = 'trnsl.1.1.20190708T121747Z.01ac6564636ef01e.c1f2621aa834e2ab8d58b26e6d9402ebe9e3aeec'
 
 app.use(express.json())
@@ -33,7 +33,6 @@ app.post('/', (req, res) => {
     request(options, (error, response, body) => {
         if (error) throw new Error(error);
         res.send(body)
-        //TODO: understand why API sends XML and not JSON
       });
       
 })

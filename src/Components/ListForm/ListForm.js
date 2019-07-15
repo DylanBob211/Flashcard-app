@@ -3,7 +3,9 @@ import './ListForm.css'
 
 const ListForm = ({addNewList}) => {
     const [newList, setNewList] = useState({
-        parole: [],
+        words: [
+            {url : '', word: ''}
+        ],
         name : ''
     })
 
@@ -13,14 +15,13 @@ const ListForm = ({addNewList}) => {
             console.warn('insert a name for the list')
         } else {
             addNewList(newList)
-            setNewList({name : ''})
+            setNewList(state => ({...state, name: ""}))
         }
         
     }
 
     const handleChange = e => {
-        setNewList({parole : [], name : e.target.value})
-        
+        setNewList({words : [], name : e.target.value})
     }
     
     return (

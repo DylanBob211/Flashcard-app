@@ -1,24 +1,34 @@
 import React, {useState, useEffect} from 'react'
 import WordItem from '../WordItem';
 import WordForm from '../WordForm'
-import { addWord, deleteWord } from './wordActions'
 import './ListItem.css'
 import TrashBinIcon from '../Icons/TrashBinIcon';
 import PlayIcon from '../Icons/PlayIcon'
 
 
-const ListItem = ({ wordsArray, listName, deleteList }) => {
+const ListItem = ({id, wordsArray, listName, deleteList, addWord, deleteWord }) => {
     
-    const [words, setWords] = useState(wordsArray)
-
-    const [isExpanded, setExpanded] = useState(false) //TODO: finish
-         
-    const listOfWords = words.map((word, index) => (<WordItem deleteWord= { deleteWord } dependency ={ setWords } name={word.word} picUrl={word.url} key={index}/>))
+    
+    
+    const listOfWords = wordsArray.map((word, index) => 
+        (<WordItem 
+            deleteWord={ deleteWord } 
+            name={ word.word } 
+            picUrls={ word.url } 
+            key={ index }
+            id = { id }
+        />))
 
     return (<div className="listItem_container" >
-                <ListHeader listName={ listName } deleteList={ deleteList }/>
+                <ListHeader 
+                    listName={ listName } 
+                    deleteList={ deleteList }
+                />
                 <ul className="listItem_wordList">{ listOfWords }</ul> 
-                <WordForm addWord={ addWord } dependency ={ setWords }/>
+                <WordForm 
+                    addWord={ addWord } 
+                    id ={ id }
+                />
             </div>)
         
     

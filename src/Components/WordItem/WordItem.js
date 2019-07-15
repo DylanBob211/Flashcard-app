@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './WordItem.css'
 
-const WordItem = ({name, picUrl, deleteWord, dependency}) => {
+const WordItem = ({name, picUrls, deleteWord, id}) => {
     
     const [isMouseOver, setMouseOver] = useState(false)
     const [mousePosition, setMousePosition] = useState({mouseX : 0, mouseY: 0})
@@ -15,28 +15,43 @@ const WordItem = ({name, picUrl, deleteWord, dependency}) => {
 
     return (
         <div onMouseOver={e => handleMouseOver(e)} onMouseOut={e => handleMouseOver(e)} onMouseMove={e => handleMouseMove(e)}>
-            <WordPreview name={ name } picUrl={picUrl} isMouseOver={ isMouseOver } mousePosition={ mousePosition }/>
-            <li className="wordItem_li">{name}</li>
-            <button onClick={e => deleteWord(name, dependency)}>removeWord</button>        
+            <WordPreview name={ name } picUrls={picUrls} isMouseOver={ isMouseOver } mousePosition={ mousePosition }/>
+            <div className="wordItem_container">
+                <li className="wordItem_name">{name}</li>
+                <button className="wordItem_remove" onClick={e => deleteWord(name, id)}>-</button>        
+            </div>
         </div>
     )
 }
 
 export default WordItem
 
-const WordPreview = ({ picUrl, isMouseOver, mousePosition, name }) => {
+const WordPreview = ({ picUrls, isMouseOver, name }) => {
 
     const dinamicStyle = {
 
-        transition: isMouseOver ? '.3s transform .6s' : '.1s transform',
-        transform: isMouseOver ? 'scale(1) translate(10%, -101%)' : 'scale(0)',
-        transformOrigin: 'top'
+        transition: isMouseOver ? '.5s all 1s' : '.3s all',
+        transform: isMouseOver ? 'scaleZ(1) translate(10%, -101%)' : 'scaleZ(0) translate(10%, -101%)',
+        transformOrigin: 'top',
+        opacity: isMouseOver ? '0.9' : '0.2'
+    }
+
+    const renderImg = () => {
+        if(picUrls === "No Img Available" || picUrls === ""){
+            return <img className="wordPreview_img" src={ require('../../Assets/imgs/no_img.svg') } alt="no Word Preview"/>
+        } else {
+            return (
+                <div className="wordPreview_imgContainer">
+                    {picUrls.map((url, ind) => (<img key={ind} className="wordPreview_img--small" src={url} />))}
+                </div>
+            )
+        }
     }
 
     return (
     <div className="wordPreview_container" style={dinamicStyle}>
         <h3 className="wordPreview_title">{ name }</h3>
-        { picUrl === "No Img Available" ? <img className="wordPreview_img" src={ require('../../Assets/imgs/abs.jpg') } alt="word preview"/> : <img className="wordPreview_img" src={ picUrl } alt="word preview" />}
+        {renderImg()}    
     </div>
     )
 }
