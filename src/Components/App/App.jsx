@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom'
 import './App.css';
-import FlashcardApp from '../FlashcardApp'
-import Logger from '../Logger'
+import FlashcardApp from '../FlashcardApp/FlashcardApp'
+import Logger from '../Logger/Logger'
 
 
 function App() {
