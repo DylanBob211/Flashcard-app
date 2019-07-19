@@ -1,0 +1,13 @@
+.practiceWindow_container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border: solid #000 4px;
+  border-radius: 20px;
+  color: black;
+  background: #ddf;
+  min-width: 75%;
+  min-height: 75%;
+}

@@ -16,7 +16,7 @@ const unsplash = new Unsplash({
   applicationId: '66c8f4bbdcd250ba88db15412fb4cf728a9a8c4db261db2a356b22a1365aa20a',
 });
 
-export const addWord = (word, setWords, listId) => {
+export const addWord = (word, setWords, fetchedId) => {
   if (!word) {
     console.warn('Inserisci una parola');
   } else {
@@ -37,9 +37,9 @@ export const addWord = (word, setWords, listId) => {
           .slice(0, -1); // 9 urls of 10
         newWord.url = arrayOfPhotos;
       })
-      .catch(() => newWord.url = 'No Img Available')
-      .then(() => setWords(state => state.map((list, index) => {
-        if (listId === index) {
+      .catch(() => { newWord.url = 'No Img Available'; })
+      .then(() => setWords(state => state.map((list) => {
+        if (fetchedId === list.id) {
           return { ...list, words: [...list.words, newWord] };
         } return list;
       }))); // TODO: refactor, illeggibile
@@ -47,8 +47,8 @@ export const addWord = (word, setWords, listId) => {
 };
 
 export const deleteWord = (wordName, setWords, listId) => {
-  setWords(state => state.map((list, index) => {
-    if (listId === index) {
+  setWords(state => state.map((list) => {
+    if (listId === list.id) {
       return { ...list, words: [...list.words.filter(element => element.word !== wordName)] };
     } return list;
   }));

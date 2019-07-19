@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import './WordItem.css';
 
 const WordItem = ({
-  name, picUrls, deleteWord, id,
+  wordItem, deleteWord, id, getFlashcardData,
 }) => {
   const [isMouseOver, setMouseOver] = useState(false);
   const [mousePosition, setMousePosition] = useState({ mouseX: 0, mouseY: 0 });
 
-  const handleMouseOver = (e) => {
+  const handleMouseOver = () => {
     setMouseOver(!isMouseOver);
   };
   const handleMouseMove = (e) => {
@@ -18,34 +19,46 @@ const WordItem = ({
     <div
       onMouseOver={e => handleMouseOver(e)}
       onMouseOut={e => handleMouseOver(e)}
-      onMouseMove={e => handleMouseMove(e)}>
-      <WordPreview
-        name={name}
-        picUrls={picUrls}
+      onMouseMove={e => handleMouseMove(e)}
+      onClick={e => getFlashcardData(wordItem)}
+    >
+      <FlashcardPreview
+        name={wordItem.word}
+        picUrls={wordItem.url}
         isMouseOver={isMouseOver}
         mousePosition={mousePosition}
       />
       <div className="wordItem_container">
-        <li className="wordItem_name">{name}</li>
-        <button className="wordItem_remove" onClick={e => deleteWord(name, id)}>-</button>
+        <li className="wordItem_name">{wordItem.word}</li>
+        <button className="wordItem_remove" onClick={e => deleteWord(wordItem.word, id)}>-</button>
       </div>
     </div>
   );
 };
 
+WordItem.propTypes = {
+  wordItem: PropTypes.shape({
+    word: PropTypes.string.isRequired,
+    url: PropTypes.arrayOf(PropTypes.string.isRequired),
+  }).isRequired,
+  deleteWord: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
+};
+
+
 export default WordItem;
 
-const WordPreview = ({ picUrls, isMouseOver, name }) => {
+const FlashcardPreview = ({ picUrls, isMouseOver, name }) => {
   const dinamicStyle = {
 
     transition: isMouseOver ? '.5s all 1s' : '.3s all',
-    transform: isMouseOver ? 'scaleZ(1) translate(10%, -101%)' : 'scaleZ(0) translate(10%, -101%)',
+    transform: isMouseOver ? 'scaleZ(1) translate(0%, -101%)' : 'scaleZ(0) translate(10%, -101%)',
     transformOrigin: 'top',
     opacity: isMouseOver ? '0.9' : '0.2',
   };
 
   const renderImg = () => {
-    if (picUrls === 'No Img Available' || picUrls === '') {
+    if (picUrls[0] === 'No Img Available' || picUrls[0] === '') {
       return <img className="wordPreview_img" src={require('../../Assets/imgs/no_img.svg')} alt="no Word Preview" />;
     }
     return (
@@ -61,4 +74,10 @@ const WordPreview = ({ picUrls, isMouseOver, name }) => {
       {renderImg()}
     </div>
   );
+};
+
+FlashcardPreview.propTypes = {
+  name: PropTypes.string.isRequired,
+  picUrls: PropTypes.arrayOf(PropTypes.string).isRequired,
+  isMouseOver: PropTypes.bool.isRequired,
 };

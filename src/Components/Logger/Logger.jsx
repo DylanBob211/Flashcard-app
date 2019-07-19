@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import './Logger.css';
 
 
@@ -38,6 +39,10 @@ const FirstCard = ({ next }) => (
   </div>
 );
 
+FirstCard.propTypes = {
+  next: PropTypes.func.isRequired,
+};
+
 const SecondCard = ({ prev }) => {
   const goAhead = (e) => {
     e.preventDefault();
@@ -58,4 +63,8 @@ const SecondCard = ({ prev }) => {
       </form>
     </div>
   );
+};
+
+SecondCard.propTypes = {
+  prev: PropTypes.func.isRequired,
 };

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import './WordForm.css';
 
 
@@ -25,6 +26,10 @@ const WordForm = ({ addWord, id }) => {
   );
 };
 
+WordForm.propTypes = {
+  addWord: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+};
 
 export default WordForm;
 
@@ -43,3 +48,8 @@ const AddWordInput = ({ handleChange, newWord }) => (
     placeholder="Add word here..."
   />
 );
+
+AddWordInput.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  newWord: PropTypes.string.isRequired,
+};
