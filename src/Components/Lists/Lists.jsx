@@ -4,7 +4,7 @@ import ListItem from '../ListItem';
 import './Lists.css';
 
 const Lists = ({
-  lists, deleteList, addWord, deleteWord, getFlashcardData,
+  lists, deleteList, addWord, deleteWord, getFlashcardData, openFlashcard,
 }) => (
   <div className="lists_container">
     {lists.map(listItem => (
@@ -16,7 +16,7 @@ const Lists = ({
         id={listItem.id}
         listName={listItem.name}
         wordsArray={listItem.words}
-        getFlashcardData={getFlashcardData}
+        openFlashcard={openFlashcard}
       />
     ))}
   </div>

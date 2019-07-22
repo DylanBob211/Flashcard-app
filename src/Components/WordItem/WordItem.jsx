@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './WordItem.css';
 
 const WordItem = ({
-  wordItem, deleteWord, id, getFlashcardData,
+  wordItem, deleteWord, id, getFlashcardData, openFlashcard
 }) => {
   const [isMouseOver, setMouseOver] = useState(false);
   const [mousePosition, setMousePosition] = useState({ mouseX: 0, mouseY: 0 });
@@ -20,7 +20,7 @@ const WordItem = ({
       onMouseOver={e => handleMouseOver(e)}
       onMouseOut={e => handleMouseOver(e)}
       onMouseMove={e => handleMouseMove(e)}
-      onClick={e => getFlashcardData(wordItem)}
+      onClick={e => openFlashcard(wordItem)}
     >
       <FlashcardPreview
         name={wordItem.word}

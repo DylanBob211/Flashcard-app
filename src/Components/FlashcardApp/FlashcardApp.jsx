@@ -14,17 +14,20 @@ const FlashcardApp = () => {
   ]);
 
   const [isPractiseWindowOpen, setPracticeWindowOpen] = useState(false);
+  const [windowState, setWindowState] = useState({ case: '', data: [] });
 
   useEffect(() => {
     console.log(lists);
   }, [lists]);
 
-  const getFlashcardData = listId => (wordItem) => {
-    const flashcardData = lists.filter(list => list.id === listId)[0]
-      .words.filter(word => word.word === wordItem.word);
-    console.log(flashcardData);
-  };
+  const getFlashcardData = (listId, wordItem) => lists.filter(list => list.id === listId)[0]
+    .words.filter(word => word.word === wordItem.word);
 
+  const openFlashcard = listId => (wordItem) => {
+    setPracticeWindowOpen(true);
+    const flashcardData = getFlashcardData(listId, wordItem);
+    setWindowState({ case: 'word', data: [flashcardData] });
+  }; // TODO: finish!
   /* curried word Actions with dependencies injected */
 
   const addWord = fetchedId => newWord => addWordDependent(newWord, setLists, fetchedId);
@@ -48,11 +51,13 @@ const FlashcardApp = () => {
         deleteList={deleteList}
         lists={lists}
         getFlashcardData={getFlashcardData}
+        openFlashcard={openFlashcard}
       />
       <PracticeWindow
         lists={lists}
         getFlashcardData={getFlashcardData}
         isOpen={isPractiseWindowOpen}
+        windowState={windowState}
       />
     </div>
   );

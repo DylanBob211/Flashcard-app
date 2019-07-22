@@ -8,15 +8,15 @@ import PlayIcon from '../Icons/PlayIcon';
 
 
 const ListItem = ({
-  id, wordsArray, listName, deleteList, addWord, deleteWord, getFlashcardData,
+  id, wordsArray, listName, deleteList, addWord, deleteWord, openFlashcard
 }) => {
   const listOfWords = wordsArray.map((word, index) => (
     <WordItem
-      getFlashcardData={getFlashcardData(id)}
       deleteWord={deleteWord(id)}
       wordItem={word}
       key={index}
       id={index}
+      openFlashcard={openFlashcard(id)}
     />
   ));
 
