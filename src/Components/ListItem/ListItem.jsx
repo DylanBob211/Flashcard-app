@@ -8,7 +8,7 @@ import PlayIcon from '../Icons/PlayIcon';
 
 
 const ListItem = ({
-  id, wordsArray, listName, deleteList, addWord, deleteWord, openFlashcard
+  id, wordsArray, listName, deleteList, addWord, deleteWord, openFlashcard, openExerciseWindow
 }) => {
   const listOfWords = wordsArray.map((word, index) => (
     <WordItem
@@ -25,6 +25,7 @@ const ListItem = ({
       <ListHeader
         listName={listName}
         deleteList={deleteList}
+        openExerciseWindow={openExerciseWindow(id)}
       />
       <ul className="listItem_wordList">{ listOfWords }</ul>
       <WordForm
@@ -44,15 +45,17 @@ ListItem.propTypes = {
   deleteList: PropTypes.func.isRequired,
   addWord: PropTypes.func.isRequired,
   deleteWord: PropTypes.func.isRequired,
+  openFlashcard: PropTypes.func.isRequired,
+  openExerciseWindow: PropTypes.func.isRequired,
 };
 
 
-const ListHeader = ({ listName, deleteList }) => (
+const ListHeader = ({ listName, deleteList, openExerciseWindow }) => (
   <div className="listItem_header_container">
     <h2 className="listItem_title">{ listName }</h2>
     <div className="listItem_iconbox">
       <TrashBinIcon customFunction={deleteList} dependencies={listName} classIcon="listItem_icon--trashbin" />
-      <PlayIcon classIcon="listItem_icon--play" />
+      <PlayIcon classIcon="listItem_icon--play" customFunction={openExerciseWindow} />
     </div>
   </div>
 );
@@ -60,6 +63,7 @@ const ListHeader = ({ listName, deleteList }) => (
 ListHeader.propTypes = {
   listName: PropTypes.string.isRequired,
   deleteList: PropTypes.func.isRequired,
+  openExerciseWindow: PropTypes.func.isRequired,
 };
 
 export default ListItem;

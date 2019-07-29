@@ -2,27 +2,13 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './PracticeWindow.css';
 import Flashcard from './Flashcard/Flashcard';
-
-const PracticeWindow = ({ lists, isOpen, windowState }) => {
-  // const render = (state) => {
-  //   switch (state.case) { // TODO: finish it
-  //     case 'word': return <Flashcard wordData={state.data} />;
-  //     case 'excercise': return <>Mi sto esercitando</>;
-  //     default: return (
-  //       <div className="practiceWindow_container">
-  //     Nothing has been chosen yet
-  //       </div>
-  //     );
-  //   }
-  // };
-
+import Exercise from './Exercise/Exercise'
+const PracticeWindow = ({ windowState }) => {
+  const practiceWindowWrapper = (Component, data) => <div className="practiceWindow_container"><Component data={data} /></div>;
+  
   switch (windowState.case) { // TODO: finish it
-    case 'word': return <Flashcard wordData={windowState.data[0]}/>;
-    case 'exercise': return (
-      <div className="practiceWindow_container">
-    Mi sto esercitando
-      </div>
-    );
+    case 'flashcard': return practiceWindowWrapper(Flashcard, windowState.data);
+    case 'practise': return practiceWindowWrapper(Exercise, windowState.data);
     default: return null;
   }
 };
@@ -38,7 +24,6 @@ PracticeWindow.propTypes = {
       }),
     ),
   })).isRequired,
-  // isOpen: PropTypes.bool.required,
 };
 
 export default PracticeWindow;

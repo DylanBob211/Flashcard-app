@@ -11,8 +11,6 @@ import PracticeWindow from '../PracticeWindow';
 const FlashcardApp = () => {
 
   const [lists, setLists] = useState(initialState);
-
-  const [isPractiseWindowOpen, setPracticeWindowOpen] = useState(false);
   const [windowState, setWindowState] = useState({ case: '', data: [] });
 
   useEffect(() => {
@@ -24,11 +22,16 @@ const FlashcardApp = () => {
     .words.filter(word => word.word === wordItem.word);
 
   const openFlashcard = listId => (wordItem) => {
-    setPracticeWindowOpen(true);
     const flashcardData = getFlashcardData(listId, wordItem);
-    setWindowState({ case: 'word', data: [flashcardData] });
+    setWindowState({ case: 'flashcard', data: flashcardData });
   };
 
+  const getListData = listId => lists.filter(list => list.id === listId)[0].words;
+
+  const openExerciseWindow = listId => () => {
+    const listToPracticeData = getListData(listId);
+    setWindowState({ case: 'practise', data: listToPracticeData });
+  };
   /* setState injections */
 
   const addWord = addWordDependent(setLists);
@@ -47,11 +50,9 @@ const FlashcardApp = () => {
         lists={lists}
         getFlashcardData={getFlashcardData}
         openFlashcard={openFlashcard}
+        openExerciseWindow={openExerciseWindow}
       />
       <PracticeWindow
-        lists={lists}
-        getFlashcardData={getFlashcardData}
-        isOpen={isPractiseWindowOpen}
         windowState={windowState}
       />
     </div>
