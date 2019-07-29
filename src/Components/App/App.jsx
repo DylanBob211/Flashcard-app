@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  BrowserRouter as Router, Route, Redirect,
+  BrowserRouter as Router, Route, Redirect, Miss,
 } from 'react-router-dom';
 import './App.css';
 import FlashcardApp from '../FlashcardApp/FlashcardApp';

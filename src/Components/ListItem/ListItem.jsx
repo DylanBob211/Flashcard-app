@@ -29,7 +29,6 @@ const ListItem = ({
       <ul className="listItem_wordList">{ listOfWords }</ul>
       <WordForm
         addWord={addWord(id)}
-        id={id}
       />
     </div>
   );

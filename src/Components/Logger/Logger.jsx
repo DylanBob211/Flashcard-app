@@ -23,7 +23,7 @@ const FirstCard = ({ next }) => (
   <div className="loginCard_container">
     <h1 className="loginCard_welcome">Welcome</h1>
     <h2 className="loginCard_order">Choose your mother tongue</h2>
-    <form form className="loginCard_form">
+    <form className="loginCard_form">
       <select className="loginCard_select">
         <option>bla</option>
         <option>qua</option>

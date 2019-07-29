@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import uuidv4 from 'uuidv4';
-import { addNewList as addNewListDependent, deleteList as deleteListDependent } from '../../Actions/listActions';
-import { addWord as addWordDependent, deleteWord as deleteWordDependent } from '../../Actions/wordActions';
+import initialState from '../initialState';
+import addNewListDependent from '../../Actions/listActions/addNewList';
+import deleteListDependent from '../../Actions/listActions/deleteList';
+import addWordDependent from '../../Actions/wordActions/addWordToList';
+import deleteWordDependent from '../../Actions/wordActions/deleteWord';
 import Lists from '../Lists/Lists';
 import ListForm from '../ListForm/ListForm';
 import PracticeWindow from '../PracticeWindow';
 
 const FlashcardApp = () => {
-  const [lists, setLists] = useState([
-    { id: uuidv4(), name: 'Rifiuti', words: [{ word: 'secchio della spazzatura', url: ['No Img Available'] }, { word: 'discarica', url: ['No Img Available'] }] },
-    { id: uuidv4(), name: 'Cibo', words: [{ word: 'pizza', url: ['No Img Available'] }, { word: 'insalata', url: ['No Img Available'] }] },
-    { id: uuidv4(), name: 'Viaggiare', words: [{ word: 'maremma', url: ['No Img Available'] }, { word: 'colcane', url: ['No Img Available'] }] },
-  ]);
+
+  const [lists, setLists] = useState(initialState);
 
   const [isPractiseWindowOpen, setPracticeWindowOpen] = useState(false);
   const [windowState, setWindowState] = useState({ case: '', data: [] });
@@ -20,6 +19,7 @@ const FlashcardApp = () => {
     console.log(lists);
   }, [lists]);
 
+  /* handlers */
   const getFlashcardData = (listId, wordItem) => lists.filter(list => list.id === listId)[0]
     .words.filter(word => word.word === wordItem.word);
 
@@ -27,20 +27,15 @@ const FlashcardApp = () => {
     setPracticeWindowOpen(true);
     const flashcardData = getFlashcardData(listId, wordItem);
     setWindowState({ case: 'word', data: [flashcardData] });
-  }; // TODO: finish!
-  /* curried word Actions with dependencies injected */
+  };
 
-  const addWord = fetchedId => newWord => addWordDependent(newWord, setLists, fetchedId);
-  const deleteWord = id => wordName => deleteWordDependent(wordName, setLists, id);
+  /* setState injections */
 
-  /** ******************* */
-
-  /* List Actions with dependencies injected */
-
+  const addWord = addWordDependent(setLists);
+  const deleteWord = deleteWordDependent(setLists);
   const addNewList = newList => addNewListDependent(newList, setLists);
   const deleteList = listName => deleteListDependent(listName, setLists);
 
-  /** **************** */
 
   return (
     <div>

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WordForm Component Matches to snapshot 1`] = `
+<form
+  className="wordForm_container"
+  onSubmit={[Function]}
+>
+  <input
+    className="wordForm_input"
+    onChange={[Function]}
+    placeholder="Add word here..."
+    type="text"
+    value=""
+  />
+  <button
+    className="wordForm_btn"
+    type="submit"
+  />
+</form>
+`;

@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Logger Component Matches to snapshot 1`] = `
+<div
+  className="loginCard_container"
+>
+  <h1
+    className="loginCard_welcome"
+  >
+    Welcome
+  </h1>
+  <h2
+    className="loginCard_order"
+  >
+    Choose your mother tongue
+  </h2>
+  <form
+    className="loginCard_form"
+  >
+    <select
+      className="loginCard_select"
+    >
+      <option>
+        bla
+      </option>
+      <option>
+        qua
+      </option>
+      <option>
+        dia
+      </option>
+    </select>
+    <button
+      className="loginCard_button loginCard_button--primary"
+      onClick={[Function]}
+    >
+      Continue
+    </button>
+  </form>
+</div>
+`;
