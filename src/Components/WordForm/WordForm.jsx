@@ -3,16 +3,21 @@ import PropTypes from 'prop-types';
 import './WordForm.css';
 
 
-const WordForm = ({ addWord }) => {
+const WordForm = ({ addWord, handleError }) => {
   const [newWord, setNewWord] = useState('');
 
   const createNewWord = (e) => {
     e.preventDefault();
+    if (!newWord) {
+      handleError('Input something, please');
+    }
     addWord(newWord);
     setNewWord('');
   };
 
   const handleChange = (e) => {
+    e.persist();
+    handleError('');
     setNewWord(e.target.value);
   };
 
@@ -28,6 +33,7 @@ const WordForm = ({ addWord }) => {
 
 WordForm.propTypes = {
   addWord: PropTypes.func.isRequired,
+  handleError: PropTypes.func.isRequired,
 };
 
 export default WordForm;

@@ -3,7 +3,7 @@ import uuidv4 from 'uuidv4';
 import PropTypes from 'prop-types';
 import './ListForm.css';
 
-const ListForm = ({ addNewList }) => {
+const ListForm = ({ addNewList, handleError }) => {
   const [newList, setNewList] = useState({
     words: [
       { url: '', word: '' },
@@ -15,15 +15,16 @@ const ListForm = ({ addNewList }) => {
   const createNewList = (e) => {
     e.preventDefault();
     if (!newList.name) {
-      console.warn('insert a name for the list'); // TODO: change
+      handleError('Input a name for the list');
+      console.error('Input a name for the list');
     } else {
-      // setNewList(state => ({ ...state, id: uuidv4() }));
       addNewList(newList);
       setNewList(state => ({ ...state, name: '', id: '' }));
     }
   };
 
   const handleChange = (e) => {
+    handleError('');
     setNewList({ id: uuidv4(), words: [], name: e.target.value });
   };
 
@@ -42,6 +43,7 @@ const ListForm = ({ addNewList }) => {
 
 ListForm.propTypes = {
   addNewList: PropTypes.func.isRequired,
+  handleError: PropTypes.func.isRequired,
 };
 
 export default ListForm;

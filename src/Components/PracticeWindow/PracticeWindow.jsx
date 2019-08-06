@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import useOutsideClick from '../../Hooks/useOutsideHandler';
 import './PracticeWindow.css';
 import Flashcard from './Flashcard/Flashcard';
-import Exercise from './Exercise/Exercise'
-const PracticeWindow = ({ windowState }) => {
-  const practiceWindowWrapper = (Component, data) => <div className="practiceWindow_container"><Component data={data} /></div>;
-  
-  switch (windowState.case) { // TODO: finish it
+import ExerciseSettingsPanel from './ExerciseSettingsPanel/ExerciseSettingsPanel';
+
+const PracticeWindow = ({ windowState, closeExerciseWindow }) => {
+  const refWrapper = useRef(null);
+  useOutsideClick(refWrapper, closeExerciseWindow);
+  const practiceWindowWrapper = (Component, data) => <div ref={refWrapper} className="practiceWindow_container"><Component data={data} /></div>;
+
+  switch (windowState.case) {
     case 'flashcard': return practiceWindowWrapper(Flashcard, windowState.data);
-    case 'practise': return practiceWindowWrapper(Exercise, windowState.data);
+    case 'practise': return practiceWindowWrapper(ExerciseSettingsPanel, windowState.data);
+    case '': return null;
     default: return null;
   }
 };
 
 PracticeWindow.propTypes = {
-  lists: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    words: PropTypes.arrayOf(
-      PropTypes.shape({
-        word: PropTypes.string,
-        url: PropTypes.arrayOf(PropTypes.string),
-      }),
-    ),
-  })).isRequired,
+  windowState: PropTypes.shape({
+    case: PropTypes.string,
+    data: PropTypes.array || PropTypes.object, // TODO: non funziona, ma per capirci che qualcosa va fatto
+  }).isRequired,
+  closeExerciseWindow: PropTypes.func.isRequired,
 };
 
 export default PracticeWindow;

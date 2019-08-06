@@ -4,7 +4,7 @@ import ListItem from '../ListItem';
 import './Lists.css';
 
 const Lists = ({
-  lists, deleteList, addWord, deleteWord, openFlashcard, openExerciseWindow,
+  lists, deleteList, addWord, deleteWord, openFlashcard, openExerciseWindow, handleError
 }) => (
   <div className="lists_container">
     {lists.map(listItem => (
@@ -18,6 +18,7 @@ const Lists = ({
         wordsArray={listItem.words}
         openFlashcard={openFlashcard}
         openExerciseWindow={openExerciseWindow}
+        handleError={handleError}
       />
     ))}
   </div>
@@ -39,5 +40,7 @@ Lists.propTypes = {
   deleteWord: PropTypes.func.isRequired,
   openFlashcard: PropTypes.func.isRequired,
   openExerciseWindow: PropTypes.func.isRequired,
+  handleError: PropTypes.func.isRequired,
 };
+
 export default Lists;

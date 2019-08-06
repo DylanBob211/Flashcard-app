@@ -8,7 +8,8 @@ import PlayIcon from '../Icons/PlayIcon';
 
 
 const ListItem = ({
-  id, wordsArray, listName, deleteList, addWord, deleteWord, openFlashcard, openExerciseWindow
+  id, wordsArray, listName, deleteList, addWord,
+  deleteWord, openFlashcard, openExerciseWindow, handleError,
 }) => {
   const listOfWords = wordsArray.map((word, index) => (
     <WordItem
@@ -30,6 +31,7 @@ const ListItem = ({
       <ul className="listItem_wordList">{ listOfWords }</ul>
       <WordForm
         addWord={addWord(id)}
+        handleError={handleError}
       />
     </div>
   );
@@ -47,6 +49,7 @@ ListItem.propTypes = {
   deleteWord: PropTypes.func.isRequired,
   openFlashcard: PropTypes.func.isRequired,
   openExerciseWindow: PropTypes.func.isRequired,
+  handleError: PropTypes.func.isRequired,
 };
 
 
