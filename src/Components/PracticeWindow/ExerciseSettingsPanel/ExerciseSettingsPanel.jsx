@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import PlayIcon from '../../Icons/PlayIcon';
-import PracticeSession from './PracticeSession/PracticeSession'
+import PracticeSession from './PracticeSession/PracticeSession';
 
 const ExerciseSettingsPanel = ({ data }) => {
-  const [practiceSession, setPracticeSession] = useState({ type: 'Guess the flashcard', data: [data.words], isActive: false });
+  const [practiceSession, setPracticeSession] = useState({ type: 'Guess the flashcard', data: data.words, isActive: false });
   useEffect(() => {
     console.log(practiceSession);
   }, [practiceSession]);
@@ -15,7 +15,8 @@ const ExerciseSettingsPanel = ({ data }) => {
   const startPracticeSession = () => {
     setPracticeSession(state => ({ ...state, isActive: true }));
   };
-  return (
+
+  const PracticePannel = props => (
     <>
       <h2>{data.name}</h2>
       <div className="exerciseForm_btnContainer">
@@ -24,9 +25,14 @@ const ExerciseSettingsPanel = ({ data }) => {
         <button className="exerciseForm_btn" type="button" onClick={e => selectExerciseType(e)} value="Translate from target">Translate From Target Language</button>
       </div>
       <PlayIcon customFunction={() => startPracticeSession()} classIcon="exerciseForm_startBtn" />
-      {practiceSession.isActive
-        ? <PracticeSession data={practiceSession.data} />
-        : null}
+    </>
+  );
+  return (
+    <>
+
+      {!practiceSession.isActive
+        ? <PracticePannel />
+        : <PracticeSession data={practiceSession.data} />}
     </>
   );
 };
