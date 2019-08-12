@@ -8,7 +8,7 @@ const PracticeSession = ({ data }) => {
   const answerInitialState = answerEmptyArray.fill({ givenAnswer: null, isRight: null });
 
   const [step, setStep] = useState(0);
-  const [gameWords, setGameWords] = useState([{ url: '', word: '' }]);
+  const [gameWords, setGameWords] = useState([{ url: '', word: '', photoNumber: 0 }]);
   const [answer, setAnswer] = useState('');
   const [answers, setAnswers] = useState(answerInitialState);
   const handleChange = (e) => {
@@ -18,7 +18,7 @@ const PracticeSession = ({ data }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setAnswers(state => state.map((element, ind) => {
-      if (step === ind) return { givenAnswer: answer, isRigth: compareInputs(answer, gameWords[step].word) };
+      if (step === ind) return { givenAnswer: answer, isRight: compareInputs(answer, gameWords[step].word) };
       return element;
     }));
     setAnswer('');
@@ -31,19 +31,43 @@ const PracticeSession = ({ data }) => {
   };
   useEffect(() => {
     const arr = Array(...data);
+    arr.forEach((obj) => {
+      obj.photoNumber = Math.floor(Math.random() * obj.url.length);
+    });
     shuffle(arr);
     setGameWords(arr);
-    console.log(answers, step);
-  }, [answers, step]);
+  }, []);
 
   return (
     <div>
-      <img src={gameWords[step].url[Math.floor(Math.random() * 9)]} alt="" />
+      <img
+        style={{ maxWidth: '4rem', maxHeight: '4rem' }}
+        src={gameWords[step].url[gameWords[step].photoNumber]}
+        alt=""
+      />
       <form onSubmit={e => handleSubmit(e)}>
-        <input type="text" name={gameWords[step].word} onChange={e => handleChange(e)} value={answer} />
+        <h3>{answer}</h3>
+        <h3>{gameWords[step].word}</h3>
+        <input
+          style={{ backgroundColor: answers[step].isRight ? 'green' : 'red' }}
+          type="text"
+          name={gameWords[step].word}
+          onChange={e => handleChange(e)}
+          value={answer}
+        />
         <button type="submit">Submit Answer</button>
       </form>
       <button type="button" onClick={() => goAhead()}>Vai avanti</button>
+      {gameWords.map(gameElement => (
+        <div
+          style={{
+            width: '3rem', height: '3rem', borderRadius: '50%', backgroundColor: 'black', display: 'inline',
+          }}
+          key={`${gameElement.photoNumber} ${gameElement.word}`}
+        >
+          {'oo'}
+        </div>
+      ))}
       <button type="button" onClick={() => goBack()}>Torna indietro</button>
     </div>
   );

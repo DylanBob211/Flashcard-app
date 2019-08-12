@@ -13,7 +13,6 @@ export default ({ translateWord, searchPhotos }) => setWords => fetchedListId =>
 
   translateWord(word)
     .then(wordInEnglish => Promise.resolve(searchPhotos(wordInEnglish)))
-    .catch(e => console.log(e))
     .then(res => res.json())
     .catch(e => console.log(e))
     .then((res) => {

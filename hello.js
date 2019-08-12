@@ -1,9 +1,11 @@
+const axios = require('axios').default;
 
-const message = 'hello';
 
-function sth() {
+const translateWord = (word) => {
+  axios.post('http://localhost:5000/', {
+    word,
+    lang: 'it-en', // TODO : language hardcoded, make dynamic
+  }).then(res => console.log(res));
+};
 
-    console.log(message);
-}
-
-sth();
+translateWord('mamma');

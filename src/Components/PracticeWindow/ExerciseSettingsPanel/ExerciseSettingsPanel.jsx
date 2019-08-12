@@ -5,9 +5,6 @@ import PracticeSession from './PracticeSession/PracticeSession';
 
 const ExerciseSettingsPanel = ({ data }) => {
   const [practiceSession, setPracticeSession] = useState({ type: 'Guess the flashcard', data: data.words, isActive: false });
-  useEffect(() => {
-    console.log(practiceSession);
-  }, [practiceSession]);
   const selectExerciseType = (e) => {
     e.persist();
     setPracticeSession(state => ({ ...state, type: e.target.value }));
@@ -16,7 +13,7 @@ const ExerciseSettingsPanel = ({ data }) => {
     setPracticeSession(state => ({ ...state, isActive: true }));
   };
 
-  const PracticePannel = props => (
+  const PracticePannel = () => (
     <>
       <h2>{data.name}</h2>
       <div className="exerciseForm_btnContainer">
