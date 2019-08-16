@@ -19,20 +19,36 @@ exports[`Logger Component Matches to snapshot 1`] = `
   >
     <select
       className="loginCard_select"
+      onChange={[Function]}
     >
-      <option>
-        bla
+      <option
+        disabled={true}
+        value=""
+      />
+      <option
+        disabled={false}
+        value="en"
+      >
+        English
       </option>
-      <option>
-        qua
+      <option
+        disabled={false}
+        value="it"
+      >
+        Italian
       </option>
-      <option>
-        dia
+      <option
+        disabled={false}
+        value="ru"
+      >
+        Russian
       </option>
     </select>
     <button
       className="loginCard_button loginCard_button--primary"
+      disabled={true}
       onClick={[Function]}
+      type="button"
     >
       Continue
     </button>

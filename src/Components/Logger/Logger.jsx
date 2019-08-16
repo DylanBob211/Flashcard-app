@@ -1,55 +1,70 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Logger.css';
 
 
-const Logger = () => {
+const Logger = ({ languages, setLanguages }) => {
   const [step, setStep] = useState(1);
-  const [langValue, setLangValue] = useState({ from: '', to: '' });
 
   const handleFirst = (e) => {
     e.persist();
-    setLangValue(state => ({ ...state, from: e.target.value }));
+    setLanguages(state => ({ ...state, from: e.target.value }));
   };
   const handleSecond = (e) => {
     e.persist();
-    setLangValue(state => ({ ...state, to: e.target.value }));
+    setLanguages(state => ({ ...state, to: e.target.value }));
   };
 
   useEffect(() => {
-    console.log(langValue);
-  }, [langValue]);
+    console.log(languages);
+  }, [languages]);
 
   const nextStep = () => setStep(() => step + 1);
 
   const prevStep = () => setStep(() => step - 1);
 
   switch (step) {
-    case 1: return <FirstCard langValue={langValue} next={nextStep} handleFirst={handleFirst} />;
-    case 2: return <SecondCard langValue={langValue} prev={prevStep} handleSecond={handleSecond} />;
+    case 1: return <FirstCard languages={languages} next={nextStep} handleFirst={handleFirst} />;
+    case 2: return <SecondCard languages={languages} prev={prevStep} handleSecond={handleSecond} />;
     default: return <FirstCard />;
   }
 };
 
+Logger.propTypes = {
+  languages: PropTypes.shape({
+    from: PropTypes.string,
+    to: PropTypes.string,
+  }),
+  setLanguages: PropTypes.func.isRequired,
+};
+
+Logger.defaultProps = {
+  languages: {
+    from: '',
+    to: '',
+  },
+};
+
 export default Logger;
 
-const FirstCard = ({ next, handleFirst, langValue }) => (
+const FirstCard = ({ next, handleFirst, languages }) => (
   <div className="loginCard_container">
     <h1 className="loginCard_welcome">Welcome</h1>
     <h2 className="loginCard_order">Choose your mother tongue</h2>
     <form className="loginCard_form">
       <select
-        value={langValue.from}
+        value={languages.from}
         className="loginCard_select"
         onChange={e => handleFirst(e)}
       >
         <option disabled value="" />
-        <option disabled={langValue.to === 'en'} value="en">English</option>
-        <option disabled={langValue.to === 'it'} value="it">Italian</option>
-        <option disabled={langValue.to === 'ru'} value="ru">Russian</option>
+        <option disabled={languages.to === 'en'} value="en">English</option>
+        <option disabled={languages.to === 'it'} value="it">Italian</option>
+        <option disabled={languages.to === 'ru'} value="ru">Russian</option>
       </select>
       <button
-        disabled={!langValue.from}
+        disabled={!languages.from}
         type="button"
         className="loginCard_button loginCard_button--primary"
         onClick={() => next()}
@@ -64,29 +79,32 @@ FirstCard.propTypes = {
   next: PropTypes.func.isRequired,
 };
 
-const SecondCard = ({ prev, handleSecond, langValue }) => {
+const SecondCard = ({ prev, handleSecond, languages }) => {
+  const [redirect, setRedirect] = useState(false);
   const goAhead = (e) => {
     e.preventDefault();
     // TODO: submit result
-    window.location.assign('/main');
+    setRedirect(true);
   };
+
+  if (redirect) return <Redirect to="/main" />;
   return (
     <div className="loginCard_container">
       <h2 className="loginCard_order">Choose the language that you want to learn</h2>
       <form className="loginCard_form">
         <select
-          value={langValue.to}
+          value={languages.to}
           className="loginCard_select"
           onChange={e => handleSecond(e)}
         >
           <option disabled value="" />
-          <option disabled={langValue.from === 'en'} value="en">English</option>
-          <option disabled={langValue.from === 'it'} value="it">Italian</option>
-          <option disabled={langValue.from === 'ru'} value="ru">Russian</option>
+          <option disabled={languages.from === 'en'} value="en">English</option>
+          <option disabled={languages.from === 'it'} value="it">Italian</option>
+          <option disabled={languages.from === 'ru'} value="ru">Russian</option>
         </select>
         <button type="button" className="loginCard_button loginCard_button--secondary" onClick={e => prev()}>Go back</button>
         <button
-          disabled={!langValue.to}
+          disabled={!languages.to}
           className="loginCard_button loginCard_button--primary"
           onClick={e => goAhead(e)}
           type="submit"

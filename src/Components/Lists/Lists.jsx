@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ListItem from '../ListItem';
+import ListItem from '../ListItem/ListItem';
 import './Lists.css';
 
 const Lists = ({
-  lists, deleteList, addWord, deleteWord, openFlashcard, openExerciseWindow, handleError
+  lists, deleteList, addWord, deleteWord, openFlashcard, openExerciseWindow, handleError,
 }) => (
   <div className="lists_container">
     {lists.map(listItem => (

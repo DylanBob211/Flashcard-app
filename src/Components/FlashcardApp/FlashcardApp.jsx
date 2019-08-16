@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import initialState from '../initialState';
 import addNewListDependent from '../../Actions/listActions/addNewList';
 import deleteListDependent from '../../Actions/listActions/deleteList';
@@ -6,18 +7,17 @@ import addWordDependent from '../../Actions/wordActions/addWordToList';
 import deleteWordDependent from '../../Actions/wordActions/deleteWord';
 import Lists from '../Lists/Lists';
 import ListForm from '../ListForm/ListForm';
-import PracticeWindow from '../PracticeWindow';
+import PracticeWindow from '../PracticeWindow/PracticeWindow';
 import ErrorModal from '../ErrorModal/ErrorModal';
 
-const FlashcardApp = () => {
-
+const FlashcardApp = ({ languages }) => {
   const [lists, setLists] = useState(initialState);
   const [windowState, setWindowState] = useState({ case: '', data: [] });
   const [error, setError] = useState('');
 
   useEffect(() => {
-    console.log(lists);
-  }, [lists]);
+    console.log(lists, languages);
+  }, [lists, languages]);
 
   /* handlers */
   const getFlashcardData = (listId, wordItem) => lists.filter(list => list.id === listId)[0]
@@ -71,3 +71,17 @@ const FlashcardApp = () => {
 };
 
 export default FlashcardApp;
+
+FlashcardApp.propTypes = {
+  languages: PropTypes.shape({
+    from: PropTypes.string,
+    to: PropTypes.string,
+  }),
+};
+
+FlashcardApp.defaultProps = {
+  languages: {
+    from: 'en',
+    to: 'it',
+  },
+};
