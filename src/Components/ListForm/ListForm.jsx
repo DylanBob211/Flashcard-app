@@ -6,7 +6,7 @@ import './ListForm.css';
 const ListForm = ({ addNewList, handleError }) => {
   const [newList, setNewList] = useState({
     words: [
-      { url: '', word: '' },
+      { url: [], word: '' },
     ],
     name: '',
     id: '',

@@ -22,6 +22,7 @@ module.exports = {
   plugins: [
     'react',
     'jest',
+    'cypress',
   ],
   rules: {
     "import/no-extraneous-dependencies" : ["error", { devDependencies: true }],

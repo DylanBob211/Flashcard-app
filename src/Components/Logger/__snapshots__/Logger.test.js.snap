@@ -1,57 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Logger Component Matches to snapshot 1`] = `
-<div
-  className="loginCard_container"
+exports[`Logger Component With First Card Rendered Matches to snapshot 1`] = `
+<Logger
+  languages={
+    Object {
+      "from": "",
+      "to": "",
+    }
+  }
+  setLanguages={[MockFunction]}
 >
-  <h1
-    className="loginCard_welcome"
-  >
-    Welcome
-  </h1>
-  <h2
-    className="loginCard_order"
-  >
-    Choose your mother tongue
-  </h2>
-  <form
-    className="loginCard_form"
-  >
-    <select
-      className="loginCard_select"
-      onChange={[Function]}
+  <FirstCard>
+    <div
+      className="loginCard_container"
     >
-      <option
-        disabled={true}
-        value=""
-      />
-      <option
-        disabled={false}
-        value="en"
+      <h1
+        className="loginCard_welcome"
       >
-        English
-      </option>
-      <option
-        disabled={false}
-        value="it"
+        Welcome
+      </h1>
+      <h2
+        className="loginCard_order"
       >
-        Italian
-      </option>
-      <option
-        disabled={false}
-        value="ru"
+        Choose your mother tongue
+      </h2>
+      <div
+        className="loginCard_form"
       >
-        Russian
-      </option>
-    </select>
-    <button
-      className="loginCard_button loginCard_button--primary"
-      disabled={true}
-      onClick={[Function]}
-      type="button"
-    >
-      Continue
-    </button>
-  </form>
-</div>
+        <select
+          className="loginCard_select"
+          data-test="firstLoggerScreenLanguageSelection"
+          onChange={[Function]}
+          value=""
+        >
+          <option
+            disabled={true}
+            value=""
+          />
+          <option
+            disabled={false}
+            value="en"
+          >
+            English
+          </option>
+          <option
+            disabled={false}
+            value="it"
+          >
+            Italian
+          </option>
+          <option
+            disabled={false}
+            value="ru"
+          >
+            Russian
+          </option>
+        </select>
+        <button
+          className="loginCard_button loginCard_button--primary"
+          data-test="firstLoggerScreenNextButton"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        >
+          Continue
+        </button>
+      </div>
+    </div>
+  </FirstCard>
+</Logger>
 `;
