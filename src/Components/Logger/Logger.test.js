@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Logger from './Logger';
 
+
 describe('Logger Component With First Card Rendered', () => {
   let component;
   const languages = { from: '', to: '' };
@@ -66,21 +67,33 @@ describe('Logger Component with Second Card Rendering', () => {
     expect(component.contains(<h2 className="loginCard_order">Choose the language that you want to learn</h2>)).toEqual(true);
   });
 
+  it('goes back to the first card if button is pressed', () => {
+    component
+      .find('[data-test="secondLoggerScreenBackButton"]')
+      .simulate('click');
+    expect(component.contains(<h1 className="loginCard_welcome">Welcome</h1>)).toEqual(true);
+    expect(component.contains(<h2 className="loginCard_order">Choose the language that you want to learn</h2>)).toEqual(false);
+  });
+
+  it('cannot press the button if no language for the "to" key has been inserted', () => {
+    component
+      .find('[data-test="secondLoggerScreenNextButton"]')
+      .simulate('click');
+    expect(component.contains(<h2 className="loginCard_order">Choose the language that you want to learn</h2>)).toEqual(true);
+  });
+
+  it('renders redirect component when Continue button is enabled and pressed', () => {
+    const completeLanguages = { from: 'en', to: 'it' }
+    const wrapper = mount(<Logger languages={completeLanguages} setLanguages={setLanguages} />);
+    expect(wrapper.contains(<h2 className="loginCard_order">Choose the language that you want to learn</h2>)).toEqual(false);
+  });
+
   describe('handleSecond', () => {
     it('calls setLanguages', () => {
       component
         .find('[data-test="secondLoggerScreenLanguageSelection"]')
         .simulate('change', { target: { value: 'en' } });
       expect(setLanguages).toHaveBeenCalled();
-    });
-    it.skip('calls setStep when pressing the GoBack button', () => {
-      component
-        .find('[data-test="secondLoggerScreenBackButton"]')
-        .simulate('click');
-      expect(setState).toHaveBeenCalled();
-    });
-    it('cannot change "from" key to value "it" if "it" is the value of key "to"', () => {
-
     });
   });
 });
