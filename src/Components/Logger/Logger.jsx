@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './Logger.css';
@@ -6,6 +6,7 @@ import './Logger.css';
 
 const Logger = ({ languages, setLanguages }) => {
   const [step, setStep] = useState(1);
+  const [redirect, setRedirect] = useState(false);
 
   const handleFirst = (e) => {
     e.persist();
@@ -47,7 +48,7 @@ const Logger = ({ languages, setLanguages }) => {
 
   const SecondCard = () => (
     redirect
-      ? <Redirect to="/main" />
+      ? <Redirect to="/main" data-test="redirectToMainPageComponent" />
       : (
         <div className="loginCard_container">
           <h2 className="loginCard_order">Choose the language that you want to learn</h2>

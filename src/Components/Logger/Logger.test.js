@@ -83,7 +83,7 @@ describe('Logger Component with Second Card Rendering', () => {
   });
 
   it('renders redirect component when Continue button is enabled and pressed', () => {
-    const completeLanguages = { from: 'en', to: 'it' }
+    const completeLanguages = { from: 'en', to: 'it' };
     const wrapper = mount(<Logger languages={completeLanguages} setLanguages={setLanguages} />);
     expect(wrapper.contains(<h2 className="loginCard_order">Choose the language that you want to learn</h2>)).toEqual(false);
   });
