@@ -48,11 +48,8 @@ const FlashcardApp = ({ languages }) => {
   return (
     <div>
       <ErrorModal text={error} />
-      <ListForm
-        addNewList={addNewList}
-        handleError={setError}
-      />
       <Lists
+        addNewList={addNewList}
         addWord={addWord}
         deleteWord={deleteWord}
         deleteList={deleteList}

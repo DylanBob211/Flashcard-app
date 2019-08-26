@@ -1,50 +1,79 @@
 .listForm_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem;
-    background-color: var(--primary-color);
-    border-radius: 30px 30px 0 0;
-    box-shadow: -9px 17px 21px -16px rgba(0,0,0,0.49);
-    color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px #c9c9c920 solid;
+  border-radius: 10px;
+  background: var(--bg-color);
+  box-shadow: -9px 17px 21px -16px rgba(0,0,0,0.49);
 }
 
-.listForm_input-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.listForm_input {
-    max-width: 50%;
-    margin-left: 2rem;
-    height: 1.6rem;
-    font-size: 1.5rem;
-    padding: .2em;
+.listForm_input-container {
+  display: grid;
+  height: 20%;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  align-items: center;
+  justify-items: center;
 }
 
 .listForm_btn {
-    margin-left: .5em;
-    height: 2rem;
-    background: var(--secondary-color);
-    border-radius: 5px;
-    font-weight: 600;
-    font-size: 1rem;
-    border: none;
-    transition: .2s ease-in-out all;
-    cursor: pointer;
+  fill: var(--secondary-color);
+  color: var(--secondary-color);
+  background: none;
+  border: none;
+  cursor: pointer;
+  will-change: transform, opacity;
+}
+
+.listForm_btn--lg {
+  height: 5rem;
+  width: 5rem;
+}
+
+.listForm_btn--sm {
+  height: 2rem;
+  width: 2rem;
+}
+
+.listForm_btn--remove {
+  grid-row-start: 3;
+  grid-row-end: 5;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.listForm_btn--submit {
+  grid-row-start: 3;
+  grid-row-end: 5;
+  grid-column-start: 3;
+  grid-column-end: 5;
+  font-size: 1.5rem;
 }
 
 .listForm_btn:hover{
-    background: var(--third-shade-secondary)
+  transform: scale(1.2);  
+  fill: var(--third-shade-secondary)
 }
+
+.listForm_input {
+  max-width: 70%;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  border: 3px #c9c9c990 solid;
+  border-radius: 5px;
+  height: 1.6rem;
+  font-size: 1.5rem;
+  will-change: transform, opacity;
+}
+
+
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    .listForm_container { 
-        flex-direction: column;  
-        
-    }
+
 } 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {

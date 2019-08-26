@@ -57,8 +57,8 @@ const ListHeader = ({ listName, deleteList, openExerciseWindow }) => (
   <div className="listItem_header_container">
     <h2 className="listItem_title">{ listName }</h2>
     <div className="listItem_iconbox">
-      <TrashBinIcon customFunction={deleteList} dependencies={listName} classIcon="listItem_icon--trashbin" />
-      <PlayIcon classIcon="listItem_icon--play" customFunction={openExerciseWindow} />
+      <TrashBinIcon onClick={() => deleteList(listName)} className="listItem_icon--trashbin" />
+      <PlayIcon className="listItem_icon--play" onClick={openExerciseWindow} />
     </div>
   </div>
 );

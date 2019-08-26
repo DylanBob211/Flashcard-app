@@ -11,13 +11,9 @@ const PlayIcon = ({
 
 PlayIcon.propTypes = {
   className: PropTypes.string,
-  customFunction: PropTypes.func,
-  dependencies: PropTypes.string,
 };
 
 PlayIcon.defaultProps = {
   className: '',
-  customFunction: () => {},
-  dependencies: null,
 };
 export default PlayIcon;

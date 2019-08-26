@@ -1,29 +1,85 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ListForm Component Matches to snapshot 1`] = `
-<form
-  className="listForm_container"
-  onSubmit={[Function]}
+<ListForm
+  addNewList={[MockFunction]}
+  handleError={[MockFunction]}
 >
-  <h1
-    className="listForm_title"
-  >
-    Flashcard App
-  </h1>
   <div
-    className="listForm_input-container"
+    className="listForm_container"
   >
-    <input
-      className="listForm_input"
-      onChange={[Function]}
-      type="text"
-      value=""
-    />
-    <input
-      className="listForm_btn"
-      type="submit"
-      value="+ Add Topic"
-    />
+    <ForwardRef
+      className="listForm_btn listForm_btn--lg"
+      data-test="addNewListButton"
+      onClick={[Function]}
+      style={
+        Object {
+          "opacity": AnimatedValue {
+            "animatedStyles": Set {},
+            "children": Array [
+              AnimatedStyle {
+                "attach": [Function],
+                "children": Array [
+                  AnimatedProps {
+                    "attach": [Function],
+                    "children": Array [],
+                    "detach": [Function],
+                    "payload": Object {
+                      "className": "listForm_btn listForm_btn--lg",
+                      "data-test": "addNewListButton",
+                      "onClick": [Function],
+                      "style": [Circular],
+                    },
+                    "update": [Function],
+                  },
+                ],
+                "detach": [Function],
+                "payload": [Circular],
+              },
+            ],
+            "done": false,
+            "lastPosition": 0,
+            "lastTime": undefined,
+            "lastVelocity": undefined,
+            "payload": undefined,
+            "setValue": [Function],
+            "startPosition": 0,
+            "startTime": 1566842285757,
+            "value": 0,
+          },
+        }
+      }
+    >
+      <PlusIcon
+        className="listForm_btn listForm_btn--lg"
+        data-test="addNewListButton"
+        onClick={[Function]}
+        style={
+          Object {
+            "opacity": 0,
+          }
+        }
+      >
+        <svg
+          className="icon listForm_btn listForm_btn--lg"
+          data-test="addNewListButton"
+          height="24"
+          onClick={[Function]}
+          style={
+            Object {
+              "opacity": 0,
+            }
+          }
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"
+          />
+        </svg>
+      </PlusIcon>
+    </ForwardRef>
   </div>
-</form>
+</ListForm>
 `;
