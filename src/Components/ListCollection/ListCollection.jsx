@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ListItem from '../ListItem/ListItem';
-import './Lists.css';
+import './ListCollection.css';
 import ListForm from '../ListForm/ListForm';
 
-const Lists = ({
+const ListCollection = ({
   lists, deleteList, addWord, deleteWord, openFlashcard, openExerciseWindow, handleError, addNewList,
 }) => (
   <div className="lists_container">
@@ -29,7 +29,7 @@ const Lists = ({
   </div>
 );
 
-Lists.propTypes = {
+ListCollection.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
@@ -49,4 +49,4 @@ Lists.propTypes = {
   handleError: PropTypes.func.isRequired,
 };
 
-export default Lists;
+export default ListCollection;

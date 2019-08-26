@@ -5,8 +5,7 @@ import addNewListDependent from '../../Actions/listActions/addNewList';
 import deleteListDependent from '../../Actions/listActions/deleteList';
 import addWordDependent from '../../Actions/wordActions/addWordToList';
 import deleteWordDependent from '../../Actions/wordActions/deleteWord';
-import Lists from '../Lists/Lists';
-import ListForm from '../ListForm/ListForm';
+import Lists from '../ListCollection/ListCollection';
 import PracticeWindow from '../PracticeWindow/PracticeWindow';
 import ErrorModal from '../ErrorModal/ErrorModal';
 
