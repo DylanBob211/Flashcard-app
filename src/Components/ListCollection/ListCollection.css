@@ -10,34 +10,39 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .lists_container {
-        grid-template-columns: repeat(1, 1fr)
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: minmax(max-content, 60vh);
     }
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .lists_container {
-        grid-template-columns: repeat(2, 1fr)
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: minmax(max-content, 50vh);
     }
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .lists_container {
-        grid-template-columns: repeat(3, 1fr)
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: minmax(max-content, 45vh);
     }
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .lists_container {
-        grid-template-columns: repeat(4, 1fr)
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: minmax(max-content, 40vh);
     }
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .lists_container {
-        grid-template-columns: repeat(6, 1fr)
+        grid-template-columns: repeat(6, 1fr);
+        grid-auto-rows: minmax(max-content, 50vh);
     }
 }

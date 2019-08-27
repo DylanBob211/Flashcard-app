@@ -11,6 +11,9 @@ describe('ListForm Component', () => {
   // useState.mockImplementation(init => [init, setState]);
   beforeEach(() => {
     component = mount(<ListForm addNewList={addNewListMock} handleError={handleErrorMock} />);
+    component
+      .find('svg[data-test="addNewListButton"]')
+      .simulate('click');
   });
 
   afterEach(() => {
@@ -18,9 +21,6 @@ describe('ListForm Component', () => {
     component.unmount();
   });
 
-  it('Matches to snapshot', () => {
-    expect(component).toMatchSnapshot();
-  });
   // while not possible to properly test useState
   it.skip('calls setIsInputting when the plusIcon is pressed', () => {
     component
@@ -29,11 +29,12 @@ describe('ListForm Component', () => {
     expect(setState).toHaveBeenCalledWith(true);
   });
 
-  it('calls handleError if no input is submitted', () => {
-    component
-      .find('svg[data-test="addNewListButton"]')
-      .simulate('click');
+  it('focuses the inputForm when plusButton is pressed', () => {
+    const input = component.find('[data-test="newListTextInput"]');
+    expect(input.is(':focus')).toBe(true);
+  });
 
+  it('calls handleError if no input is submitted', () => {
     component
       .find('[data-test="submitNewListButton"]')
       .simulate('submit');
@@ -43,22 +44,16 @@ describe('ListForm Component', () => {
 
   it('calls addNewList only if some input is submitted', () => {
     component
-      .find('svg[data-test="addNewListButton"]')
-      .simulate('click');
-    component
       .find('[data-test="newListTextInput"]')
       .simulate('change', { target: { value: 'NewList' } });
     component
       .find('[data-test="submitNewListButton"]')
       .simulate('submit');
 
-    expect(addNewListMock).toHaveBeenCalledTimes(1);
+    expect(addNewListMock).toHaveBeenCalled();
   });
 
   it('calls handleError with empty string when typing into the input component', () => {
-    component
-      .find('svg[data-test="addNewListButton"]')
-      .simulate('click');
     component
       .find('[data-test="newListTextInput"]')
       .simulate('change', { target: { value: 'NewList' } });

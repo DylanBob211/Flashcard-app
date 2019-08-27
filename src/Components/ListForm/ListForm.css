@@ -9,6 +9,7 @@
 }
 
 .listForm_input-container {
+  position: absolute;
   display: grid;
   height: 20%;
   grid-template-columns: repeat(4, 1fr);
@@ -18,6 +19,7 @@
 }
 
 .listForm_btn {
+  position: absolute;
   fill: var(--secondary-color);
   color: var(--secondary-color);
   background: none;

@@ -13,8 +13,8 @@ const ListCollection = ({
         deleteList={deleteList}
         addWord={addWord}
         deleteWord={deleteWord}
-        key={listItem.id} // TODO: change key and id to uniqueID
-        id={listItem.id}
+        key={listItem.id}
+        listId={listItem.id}
         listName={listItem.name}
         wordsArray={listItem.words}
         openFlashcard={openFlashcard}
@@ -39,7 +39,7 @@ ListCollection.propTypes = {
         url: PropTypes.arrayOf(PropTypes.string),
       }),
     ),
-  })).isRequired,
+  })),
   addNewList: PropTypes.func.isRequired,
   deleteList: PropTypes.func.isRequired,
   addWord: PropTypes.func.isRequired,
@@ -47,6 +47,10 @@ ListCollection.propTypes = {
   openFlashcard: PropTypes.func.isRequired,
   openExerciseWindow: PropTypes.func.isRequired,
   handleError: PropTypes.func.isRequired,
+};
+
+ListCollection.defaultProps = {
+  lists: [],
 };
 
 export default ListCollection;

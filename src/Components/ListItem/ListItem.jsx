@@ -8,16 +8,16 @@ import PlayIcon from '../Icons/PlayIcon';
 
 
 const ListItem = ({
-  id, wordsArray, listName, deleteList, addWord,
+  listId, wordsArray, listName, deleteList, addWord,
   deleteWord, openFlashcard, openExerciseWindow, handleError,
 }) => {
   const listOfWords = wordsArray.map((word, index) => (
     <WordItem
-      deleteWord={deleteWord(id)}
+      deleteWord={deleteWord(listId)}
       wordItem={word}
       key={index}
-      id={index}
-      openFlashcard={openFlashcard(id)}
+      wordId={index}
+      openFlashcard={openFlashcard(listId)}
     />
   ));
 
@@ -26,11 +26,11 @@ const ListItem = ({
       <ListHeader
         listName={listName}
         deleteList={deleteList}
-        openExerciseWindow={openExerciseWindow(id)}
+        openExerciseWindow={openExerciseWindow(listId)}
       />
       <ul className="listItem_wordList">{ listOfWords }</ul>
       <WordForm
-        addWord={addWord(id)}
+        addWord={addWord(listId)}
         handleError={handleError}
       />
     </div>
@@ -38,7 +38,7 @@ const ListItem = ({
 };
 
 ListItem.propTypes = {
-  id: PropTypes.string.isRequired,
+  listId: PropTypes.string.isRequired,
   wordsArray: PropTypes.arrayOf(PropTypes.shape({
     word: PropTypes.string.isRequired,
     url: PropTypes.arrayOf(PropTypes.string).isRequired,
