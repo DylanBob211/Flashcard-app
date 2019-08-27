@@ -1,12 +1,14 @@
 import React, { useRef } from 'react';
 import uuidv4 from 'uuidv4';
 import PropTypes from 'prop-types';
+import { useErrorContext } from '../../Contexts/ErrorContext';
 import { useTransition, animated } from 'react-spring';
 import './ListForm.css';
 import PlusIcon from '../Icons/PlusIcon';
 import RemoveIcon from '../Icons/RemoveIcon';
 
-const ListForm = ({ addNewList, handleError }) => {
+const ListForm = ({ addNewList }) => {
+  const [, handleError] = useErrorContext();
   const [newList, setNewList] = React.useState({
     words: [
       { url: [], word: '' },
@@ -56,7 +58,7 @@ const ListForm = ({ addNewList, handleError }) => {
       {
       transitions.map(({ item, key, props }) => (item ? (
         <AnimatedPlusIcon
-          key={`${key} btn`}
+          key={`${key} ListFormAddbtn`}
           style={props}
           onClick={openAddListTextInput}
           data-test="addNewListButton"

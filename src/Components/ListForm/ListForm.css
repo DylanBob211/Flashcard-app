@@ -16,6 +16,7 @@
   grid-template-rows: repeat(4, 1fr);
   align-items: center;
   justify-items: center;
+  will-change: transform, opacity;
 }
 
 .listForm_btn {
@@ -25,12 +26,12 @@
   background: none;
   border: none;
   cursor: pointer;
-  will-change: transform, opacity;
 }
 
 .listForm_btn--lg {
   height: 5rem;
   width: 5rem;
+  will-change: transform, opacity;
 }
 
 .listForm_btn--sm {
