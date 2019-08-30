@@ -5,9 +5,12 @@ import './ListCollection.css';
 import ListForm from '../ListForm/ListForm';
 
 const ListCollection = ({
-  lists, deleteList, addWord, deleteWord, openFlashcard, openExerciseWindow, handleError, addNewList,
+  lists, deleteList, addWord, deleteWord, openFlashcard, openExerciseWindow, addNewList,
 }) => (
-  <div className="lists_container">
+  <div
+    className="lists_container"
+    data-test="listCollectionContainer"
+  >
     {lists.map(listItem => (
       <ListItem
         deleteList={deleteList}
@@ -19,11 +22,9 @@ const ListCollection = ({
         wordsArray={listItem.words}
         openFlashcard={openFlashcard}
         openExerciseWindow={openExerciseWindow}
-        handleError={handleError}
       />
     ))}
     <ListForm
-      handleError={handleError}
       addNewList={addNewList}
     />
   </div>
@@ -31,13 +32,13 @@ const ListCollection = ({
 
 ListCollection.propTypes = {
   lists: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     words: PropTypes.arrayOf(
       PropTypes.shape({
         word: PropTypes.string,
         url: PropTypes.arrayOf(PropTypes.string),
-      }),
+      }).isRequired,
     ),
   })),
   addNewList: PropTypes.func.isRequired,
@@ -46,7 +47,6 @@ ListCollection.propTypes = {
   deleteWord: PropTypes.func.isRequired,
   openFlashcard: PropTypes.func.isRequired,
   openExerciseWindow: PropTypes.func.isRequired,
-  handleError: PropTypes.func.isRequired,
 };
 
 ListCollection.defaultProps = {
