@@ -1,99 +1,166 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
+import { Redirect } from 'react-router-dom';
 import Logger from './Logger';
 
+jest.mock('react-router-dom');
 
-describe('Logger Component With First Card Rendered', () => {
-  let component;
-  const languages = { from: '', to: '' };
-  const setLanguages = jest.fn();
+describe('Logger', () => {
+  let mountedLoggerComponent;
+  const props = {
+    languages: {
+      from: '',
+      to: '',
+    },
+    setLanguages: jest.fn(),
+  };
+
+  const logger = ({ languages, setLanguages }, isShallow = false) => {
+    if (isShallow) {
+      return shallow(
+        <Logger
+          languages={languages}
+          setLanguages={setLanguages}
+        />,
+      );
+    }
+    return mount(
+      <Logger
+        languages={languages}
+        setLanguages={setLanguages}
+      />,
+    );
+  };
 
   beforeEach(() => {
-    component = mount(<Logger languages={languages} setLanguages={setLanguages} />);
+    jest.clearAllMocks();
+    mountedLoggerComponent = undefined;
   });
 
-  afterEach(() => {
-    component.unmount();
-  });
+  describe('Logger Component With First Card Rendered', () => {
+    beforeEach(() => {
+      mountedLoggerComponent = logger(props);
+    });
 
-  it('Matches to snapshot', () => {
-    expect(component).toMatchSnapshot();
-  });
+    it('Matches to snapshot', () => {
+      expect(mountedLoggerComponent).toMatchSnapshot();
+    });
 
-  it('selects a language and renders its name', () => {
-    component
-      .find('[data-test="firstLoggerScreenLanguageSelection"]')
-      .simulate('change', { target: { value: 'en' } });
-    expect(component.find('option[value="en"]').text()).toBe('English');
-  });
+    it('renders FirstCard when mounted, not SecondCard', () => {
+      const firstCard = mountedLoggerComponent
+        .find('[data-test="firstCardWrapper"]');
+      const secondCard = mountedLoggerComponent
+        .find('[data-test="secondCardWrapper"]');
 
-  it('renders FirstCard when mounted, not SecondCard', () => {
-    expect(component.contains(<h1 className="loginCard_welcome">Welcome</h1>)).toEqual(true);
-    expect(component.contains(<h2 className="loginCard_order">Choose the language that you want to learn</h2>)).toEqual(false);
-  });
+      expect(firstCard.exists()).toEqual(true);
+      expect(secondCard.exists()).toEqual(false);
+    });
 
-  describe('handleFirst', () => {
-    it('calls setLanguages', () => {
-      component
-        .find('[data-test="firstLoggerScreenLanguageSelection"]')
-        .simulate('change', { target: { value: 'en' } });
-      expect(setLanguages).toHaveBeenCalled();
+    it('calls setLanguages when selecting a language', () => {
+      const selectLanguage = mountedLoggerComponent
+        .find('[data-test="firstLoggerScreenLanguageSelection"]');
+      selectLanguage.simulate('change', { target: { value: 'en' } });
+      expect(props.setLanguages).toHaveBeenCalled();
+    });
+
+    it('cannot press the button Next if no value for prop languages.from is selected', () => {
+      const buttonNext = mountedLoggerComponent
+        .find('[data-test="firstLoggerScreenNextButton"]');
+      const secondCard = mountedLoggerComponent
+        .find('[data-test="secondCardWrapper"]');
+      buttonNext.simulate('click');
+      expect(buttonNext.props().disabled).toEqual(true);
+      expect(secondCard.exists()).toEqual(false);
     });
   });
-});
 
-describe('Logger Component with Second Card Rendering', () => {
-  let component;
-  const languages = { from: 'en', to: '' };
-  const setLanguages = jest.fn();
-
-  beforeEach(() => {
-    component = mount(<Logger languages={languages} setLanguages={setLanguages} />);
-    component
-      .find('[data-test="firstLoggerScreenLanguageSelection"]')
-      .simulate('change', { target: { value: 'en' } });
-    component
-      .find('[data-test="firstLoggerScreenNextButton"]')
-      .simulate('click');
+  describe('Logger Component with "from" props inputted', () => {
+    beforeEach(() => {
+      props.languages.from = 'en';
+      mountedLoggerComponent = logger(props);
+    });
+    it('enables the Next button to be pressed', () => {
+      const buttonNext = mountedLoggerComponent
+        .find('[data-test="firstLoggerScreenNextButton"]');
+      expect(buttonNext.props().disabled).toEqual(false);
+    });
   });
 
-  afterEach(() => {
-    component.unmount();
-    jest.clearAllMocks();
+  describe('Logger Component with Second Card Rendering', () => {
+    beforeEach(() => {
+      props.languages.from = 'en';
+      mountedLoggerComponent = logger(props);
+      const buttonNext = mountedLoggerComponent
+        .find('[data-test="firstLoggerScreenNextButton"]');
+      buttonNext.simulate('click');
+    });
+
+    it('renders SecondCard, not FirstCard anymore', () => {
+      const secondCard = mountedLoggerComponent
+        .find('[data-test="secondCardWrapper"]');
+      const firstCard = mountedLoggerComponent
+        .find('[data-test="firstCardWrapper"]');
+      expect(secondCard.exists()).toEqual(true);
+      expect(firstCard.exists()).toEqual(false);
+    });
+
+    it('disables Start! button', () => {
+      const startButton = mountedLoggerComponent
+        .find('[data-test="secondLoggerScreenNextButton"]');
+      expect(startButton.props().disabled).toEqual(true);
+    });
+
+    it('goes back to the first card if "Back" button is pressed', () => {
+      const secondCard = mountedLoggerComponent
+        .find('[data-test="secondCardWrapper"]');
+      const backButton = mountedLoggerComponent
+        .find('[data-test="secondLoggerScreenBackButton"]');
+      expect(secondCard.exists()).toEqual(true);
+      backButton.simulate('click');
+      const firstCard = mountedLoggerComponent
+        .find('[data-test="firstCardWrapper"]');
+      expect(firstCard.exists()).toEqual(true);
+    });
+
+    it('cannot press the button if no language for the "to" key has been inserted', () => {
+      const secondCard = mountedLoggerComponent
+        .find('[data-test="secondCardWrapper"]');
+      const nextButton = mountedLoggerComponent
+        .find('[data-test="secondLoggerScreenNextButton"]');
+      nextButton.simulate('click');
+      expect(secondCard.exists()).toEqual(true);
+    });
+
+    it('calls setLanguages when selecting a language', () => {
+      const selectLanguage = mountedLoggerComponent
+        .find('[data-test="secondLoggerScreenLanguageSelection"]');
+      selectLanguage.simulate('change', { target: { value: 'en' } });
+      expect(props.setLanguages).toHaveBeenCalled();
+    });
   });
 
-  it('renders SecondCard, not FirstCard anymore', () => {
-    expect(component.contains(<h1 className="loginCard_welcome">Welcome</h1>)).toEqual(false);
-    expect(component.contains(<h2 className="loginCard_order">Choose the language that you want to learn</h2>)).toEqual(true);
-  });
+  describe('Logger SecondCard with language props inserted', () => {
+    beforeEach(() => {
+      props.languages = { from: 'en', to: 'it' };
+      mountedLoggerComponent = logger(props);
+      const buttonNext = mountedLoggerComponent
+        .find('[data-test="firstLoggerScreenNextButton"]');
+      buttonNext.simulate('click');
+    });
 
-  it('goes back to the first card if button is pressed', () => {
-    component
-      .find('[data-test="secondLoggerScreenBackButton"]')
-      .simulate('click');
-    expect(component.contains(<h1 className="loginCard_welcome">Welcome</h1>)).toEqual(true);
-    expect(component.contains(<h2 className="loginCard_order">Choose the language that you want to learn</h2>)).toEqual(false);
-  });
+    it('enables Start! button', () => {
+      const startButton = mountedLoggerComponent
+        .find('[data-test="secondLoggerScreenNextButton"]');
+      expect(startButton.props().disabled).toEqual(false);
+    });
 
-  it('cannot press the button if no language for the "to" key has been inserted', () => {
-    component
-      .find('[data-test="secondLoggerScreenNextButton"]')
-      .simulate('click');
-    expect(component.contains(<h2 className="loginCard_order">Choose the language that you want to learn</h2>)).toEqual(true);
-  });
-
-  it('renders redirect component when Continue button is enabled and pressed', () => {
-    const completeLanguages = { from: 'en', to: 'it' };
-    const wrapper = mount(<Logger languages={completeLanguages} setLanguages={setLanguages} />);
-    expect(wrapper.contains(<h2 className="loginCard_order">Choose the language that you want to learn</h2>)).toEqual(false);
-  });
-
-  describe('handleSecond', () => {
-    it('calls setLanguages', () => {
-      component
-        .find('[data-test="secondLoggerScreenLanguageSelection"]')
-        .simulate('change', { target: { value: 'en' } });
-      expect(setLanguages).toHaveBeenCalled();
+    it('renders Redirect component when Start! button is pressed', () => {
+      Redirect.mockReturnValue(<div data-test="redirect" />);
+      const startButton = mountedLoggerComponent
+        .find('[data-test="secondLoggerScreenNextButton"]');
+      startButton.simulate('click');
+      
+      expect(mountedLoggerComponent.contains(<div data-test="redirect" />)).toEqual(true);
     });
   });
 });
