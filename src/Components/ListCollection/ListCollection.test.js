@@ -31,7 +31,7 @@ describe('ListCollection', () => {
   let mountedListCollection;
   let propsMock;
 
-  const listCollection = ({ 
+  const listCollection = ({
     deleteListMock, addWordMock, deleteWordMock, listsMock, addNewListMock,
     openFlashcardMock, openExerciseWindowMock,
   }, isShallow) => {
@@ -83,6 +83,12 @@ describe('ListCollection', () => {
     expect(listForm.exists()).toEqual(true);
   });
 
+  it('passes the "addNewList" prop to ListForm component', () => {
+    listCollection(propsMock, false);
+    const listForm = mountedListCollection.find('ListForm');
+    expect(listForm.props().addNewList).toEqual(propsMock.addNewListMock);
+  });
+
   it('renders no ListItem if "lists" prop is an empty array', () => {
     listCollection(propsMock, false);
     expect(mountedListCollection.find('ListItem').exists()).toEqual(false);
@@ -125,5 +131,43 @@ describe('ListCollection', () => {
     listCollection(propsMock, true);
     const listItems = mountedListCollection.find('ListItem');
     expect(listItems).toHaveLength(2);
+  });
+
+  describe('ListCollection with lists not empty', () => {
+    let listItem;
+    beforeEach(() => {
+      propsMock.listsMock = [
+        {
+          id: 'myFirstId',
+          name: 'FirstListMock',
+          words: [
+            { word: 'firstWordMock', url: ['firstUrlOne', 'firstUrlTwo'] },
+          ],
+        },
+      ];
+
+      listCollection(propsMock, true);
+      listItem = mountedListCollection.find('ListItem');
+    });
+
+    it('passes the "deleteList" prop to ListItem component', () => {
+      expect(listItem.props().deleteList).toEqual(propsMock.deleteListMock);
+    });
+
+    it('passes the "openFlashcard" prop to ListItem component', () => {
+      expect(listItem.props().openFlashcard).toEqual(propsMock.openFlashcardMock);
+    });
+
+    it('passes the "openExerciseWindow" prop to ListItem component', () => {
+      expect(listItem.props().openExerciseWindow).toEqual(propsMock.openExerciseWindowMock);
+    });
+
+    it('passes the "addWord" prop to the ListItem component', () => {
+      expect(listItem.props().addWord).toEqual(propsMock.addWordMock);
+    });
+
+    it('passes the "deleteWord" prop to the ListItem component', () => {
+      expect(listItem.props().deleteWord).toEqual(propsMock.deleteWordMock);
+    });
   });
 });

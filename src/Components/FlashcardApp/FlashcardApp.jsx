@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import initialState from '../initialState';
+import { useErrorContext } from '../../Contexts/ErrorContext';
 import addNewListDependent from '../../Actions/listActions/addNewList';
 import deleteListDependent from '../../Actions/listActions/deleteList';
 import addWordDependent from '../../Actions/wordActions/addWordToList';
 import deleteWordDependent from '../../Actions/wordActions/deleteWord';
-import Lists from '../ListCollection/ListCollection';
+import ListCollection from '../ListCollection/ListCollection';
 import PracticeWindow from '../PracticeWindow/PracticeWindow';
 import ErrorModal from '../ErrorModal/ErrorModal';
 
 const FlashcardApp = ({ languages }) => {
   const [lists, setLists] = useState(initialState);
   const [windowState, setWindowState] = useState({ case: '', data: [] });
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    console.log(lists, languages);
-  }, [lists, languages]);
+  const [error] = useErrorContext();
 
   /* handlers */
   const getFlashcardData = (listId, wordItem) => lists.filter(list => list.id === listId)[0]
@@ -36,6 +33,7 @@ const FlashcardApp = ({ languages }) => {
   const closeExerciseWindow = () => {
     setWindowState(state => ({ ...state, case: '' }));
   };
+  // TODO: crera un hook esterno dove iniettare (in TDD) setList poi importalo e passalo da qui o usa un context (specialmente per add e delete word :DDD) :D
 
   /* setState injections */
   const addWord = addWordDependent(setLists);
@@ -45,9 +43,9 @@ const FlashcardApp = ({ languages }) => {
 
 
   return (
-    <div>
+    <div data-test="FlashcardAppContainer">
       <ErrorModal text={error} />
-      <Lists
+      <ListCollection
         addNewList={addNewList}
         addWord={addWord}
         deleteWord={deleteWord}
@@ -56,7 +54,6 @@ const FlashcardApp = ({ languages }) => {
         getFlashcardData={getFlashcardData}
         openFlashcard={openFlashcard}
         openExerciseWindow={openExerciseWindow}
-        handleError={setError}
       />
       <PracticeWindow
         windowState={windowState}
