@@ -6,7 +6,7 @@ const ErrorModal = ({ text }) => (
     ? (
       <div
         data-test="errorModal"
-        style={{ 
+        style={{
           backgroundColor: 'rgba(255, 0, 0, 0.5)',
           position: 'absolute',
           left: '50%',
@@ -23,8 +23,12 @@ const ErrorModal = ({ text }) => (
     : null
 );
 
-export default ErrorModal;
-
 ErrorModal.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 };
+
+ErrorModal.defaultProps = {
+  text: '',
+};
+
+export default ErrorModal;
