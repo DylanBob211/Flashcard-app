@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import uuidv4 from 'uuidv4';
 import PropTypes from 'prop-types';
-import { useErrorContext } from '../../Contexts/ErrorContext';
 import { useTransition, animated } from 'react-spring';
+import { useErrorContext } from '../../Contexts/ErrorContext';
 import './ListForm.css';
 import PlusIcon from '../Icons/PlusIcon';
 import RemoveIcon from '../Icons/RemoveIcon';
@@ -100,7 +100,6 @@ const ListForm = ({ addNewList }) => {
 
 ListForm.propTypes = {
   addNewList: PropTypes.func.isRequired,
-  handleError: PropTypes.func.isRequired,
 };
 
 export default ListForm;

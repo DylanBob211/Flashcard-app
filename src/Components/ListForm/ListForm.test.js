@@ -1,18 +1,19 @@
 import React from 'react';
 import { mount } from 'enzyme';
+import uuidv4 from 'uuidv4';
 import * as ErrorContext from '../../Contexts/ErrorContext';
 import ListForm from './ListForm';
+
+jest.mock('uuidv4');
 
 describe('ListForm Component', () => {
   let component;
   const addNewListMock = jest.fn();
-
   const handleErrorMock = jest.spyOn(ErrorContext, 'useErrorContext');
   const setErrorMock = jest.fn();
   handleErrorMock.mockImplementation(() => [null, setErrorMock]);
 
   beforeEach(() => {
-    jest.resetModules();
     component = mount(<ListForm addNewList={addNewListMock} />);
     component
       .find('svg[data-test="addNewListButton"]')
@@ -24,12 +25,9 @@ describe('ListForm Component', () => {
     component.unmount();
   });
 
-  // while not possible to properly test useState
-  it.skip('calls setIsInputting when the plusIcon is pressed', () => {
-    component
-      .find('svg[data-test="addNewListButton"]')
-      .simulate('click');
-    expect(setStateMock).toHaveBeenCalledWith(true);
+  it('renders the form when the plusIcon is pressed', () => {
+    const input = component.find('[data-test="newListTextInput"]');
+    expect(input.exists()).toBe(true);
   });
 
   it('focuses the inputForm when plusButton is pressed', () => {
@@ -46,6 +44,7 @@ describe('ListForm Component', () => {
   });
 
   it('calls addNewList only if some input is submitted', () => {
+    uuidv4.mockImplementation(() => 'mockedId');
     component
       .find('[data-test="newListTextInput"]')
       .simulate('change', { target: { value: 'NewList' } });
@@ -53,7 +52,11 @@ describe('ListForm Component', () => {
       .find('[data-test="submitNewListButton"]')
       .simulate('submit');
 
-    expect(addNewListMock).toHaveBeenCalled();
+    expect(addNewListMock).toHaveBeenCalledWith({
+      words: [],
+      name: 'NewList',
+      id: 'mockedId',
+    });
   });
 
   it('calls handleError with empty string when typing into the input component', () => {
