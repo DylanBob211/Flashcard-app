@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListHeader matches to snapshot 1`] = `
+<div
+  className="listItem_header_container"
+>
+  <h2
+    className="listItem_title"
+  />
+  <div
+    className="listItem_iconbox"
+  >
+    <TrashBinIcon
+      className="listItem_icon--trashbin"
+      onClick={[Function]}
+    />
+    <PlayIcon
+      className="listItem_icon--play"
+      onClick={[MockFunction]}
+    />
+  </div>
+</div>
+`;
