@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import uuidv4 from 'uuidv4';
 import * as ErrorContext from '../../Contexts/ErrorContext';
 import ListForm from './ListForm';
@@ -23,6 +23,10 @@ describe('ListForm Component', () => {
   afterEach(() => {
     jest.clearAllMocks();
     component.unmount();
+  });
+
+  it('matches the snapshot', () => {
+    expect(shallow(<ListForm addNewList={addNewListMock} />)).toMatchSnapshot();
   });
 
   it('renders the form when the plusIcon is pressed', () => {

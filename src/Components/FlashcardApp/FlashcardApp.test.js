@@ -55,6 +55,11 @@ describe('FlashcardApp', () => {
     errorMock = 'hello error';
   });
 
+  it('matches the snapshot', () => {
+    const snapshotComponent = flashcardApp(props, true);
+    expect(snapshotComponent).toMatchSnapshot();
+  });
+
   it('always render a div container', () => {
     const divContainer = mountedFlashcardAppComponent
       .find('[data-test="FlashcardAppContainer"]');

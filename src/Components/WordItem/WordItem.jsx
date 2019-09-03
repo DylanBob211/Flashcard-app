@@ -46,6 +46,7 @@ WordItem.propTypes = {
   }).isRequired,
   deleteWord: PropTypes.func.isRequired,
   wordId: PropTypes.number.isRequired,
+  openFlashcard: PropTypes.func.isRequired,
 };
 
 

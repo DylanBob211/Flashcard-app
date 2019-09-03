@@ -1,9 +1,6 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import ListCollection from './ListCollection';
-import ListItem from '../ListItem/ListItem';
-import ListForm from '../ListForm/ListForm';
-
 // What does it render?
 // Always renders a div with class lists_container
 // Renders an array of ListItems if prop "lists" has, else not
@@ -29,64 +26,46 @@ import ListForm from '../ListForm/ListForm';
 
 describe('ListCollection', () => {
   let mountedListCollection;
-  let propsMock;
+  const propsMock = {
+    deleteList: jest.fn(),
+    addWord: jest.fn(),
+    deleteWord: jest.fn(),
+    openFlashcard: jest.fn(),
+    openExerciseWindow: jest.fn(),
+    addNewList: jest.fn(),
+    lists: [],
+  };
 
-  const listCollection = ({
-    deleteListMock, addWordMock, deleteWordMock, listsMock, addNewListMock,
-    openFlashcardMock, openExerciseWindowMock,
-  }, isShallow) => {
+  const listCollection = (props, isShallow) => {
+    const jsx = (
+      <ListCollection
+        {...props}
+      />
+    );
     if (isShallow) {
-      mountedListCollection = shallow(<ListCollection
-        deleteList={deleteListMock}
-        addWord={addWordMock}
-        deleteWord={deleteWordMock}
-        lists={listsMock}
-        addNewList={addNewListMock}
-        openExerciseWindow={openExerciseWindowMock}
-        openFlashcard={openFlashcardMock}
-      />);
-    } else {
-      mountedListCollection = mount(<ListCollection
-        deleteList={deleteListMock}
-        addWord={addWordMock}
-        deleteWord={deleteWordMock}
-        lists={listsMock}
-        addNewList={addNewListMock}
-        openExerciseWindow={openExerciseWindowMock}
-        openFlashcard={openFlashcardMock}
-      />);
+      return shallow(jsx);
     }
+    return mount(jsx);
   };
 
   beforeEach(() => {
     mountedListCollection = undefined;
-    propsMock = {
-      deleteListMock: jest.fn(),
-      addWordMock: jest.fn(),
-      deleteWordMock: jest.fn(),
-      openFlashcardMock: jest.fn(),
-      openExerciseWindowMock: jest.fn(),
-      addNewListMock: jest.fn(),
-      listsMock: [],
-    };
+    mountedListCollection = listCollection(propsMock, false);
   });
 
   it('always renders a div component that contains everything', () => {
-    listCollection(propsMock, false);
     const divWrapper = mountedListCollection.find('[data-test="listCollectionContainer"]');
     expect(divWrapper.exists()).toEqual(true);
   });
 
   it('always renders a ListForm component', () => {
-    listCollection(propsMock, false);
     const listForm = mountedListCollection.find('ListForm');
     expect(listForm.exists()).toEqual(true);
   });
 
   it('passes the "addNewList" prop to ListForm component', () => {
-    listCollection(propsMock, false);
     const listForm = mountedListCollection.find('ListForm');
-    expect(listForm.props().addNewList).toEqual(propsMock.addNewListMock);
+    expect(listForm.props().addNewList).toEqual(propsMock.addNewList);
   });
 
   it('renders no ListItem if "lists" prop is an empty array', () => {
@@ -94,24 +73,10 @@ describe('ListCollection', () => {
     expect(mountedListCollection.find('ListItem').exists()).toEqual(false);
   });
 
-  it('renders a ListItem component if "lists" prop has a list object', () => {
-    propsMock.listsMock = [
-      {
-        id: 'myFirstId',
-        name: 'FirstListMock',
-        words: [
-          { word: 'firstWordMock', url: ['firstUrlOne', 'firstUrlTwo'] },
-        ],
-      },
-    ];
+  describe('when lists is not empty', () => {
+    let listItem;
 
-    listCollection(propsMock, true);
-    const listItem = mountedListCollection.find('ListItem');
-    expect(listItem.exists()).toEqual(true);
-  });
-
-  it('renders a ListItem component for each "list object" in the prop "lists"', () => {
-    propsMock.listsMock = [
+    const listArray = [
       {
         id: 'myFirstId',
         name: 'FirstListMock',
@@ -128,46 +93,47 @@ describe('ListCollection', () => {
       },
     ];
 
-    listCollection(propsMock, true);
-    const listItems = mountedListCollection.find('ListItem');
-    expect(listItems).toHaveLength(2);
-  });
+    const propsSecondMock = {
+      deleteList: jest.fn(),
+      addWord: jest.fn(),
+      deleteWord: jest.fn(),
+      openFlashcard: jest.fn(),
+      openExerciseWindow: jest.fn(),
+      addNewList: jest.fn(),
+      lists: listArray,
+    };
 
-  describe('ListCollection with lists not empty', () => {
-    let listItem;
     beforeEach(() => {
-      propsMock.listsMock = [
-        {
-          id: 'myFirstId',
-          name: 'FirstListMock',
-          words: [
-            { word: 'firstWordMock', url: ['firstUrlOne', 'firstUrlTwo'] },
-          ],
-        },
-      ];
-
-      listCollection(propsMock, true);
+      mountedListCollection = listCollection(propsSecondMock, true);
       listItem = mountedListCollection.find('ListItem');
     });
 
+    it('renders a ListItem component', () => {
+      expect(listItem.exists()).toEqual(true);
+    });
+  
+    it('renders a ListItem component for each "list object" in the prop "lists"', () => {
+      expect(listItem).toHaveLength(2);
+    });
+
     it('passes the "deleteList" prop to ListItem component', () => {
-      expect(listItem.props().deleteList).toEqual(propsMock.deleteListMock);
+      expect(listItem.first().props().deleteList).toEqual(propsSecondMock.deleteList);
     });
 
     it('passes the "openFlashcard" prop to ListItem component', () => {
-      expect(listItem.props().openFlashcard).toEqual(propsMock.openFlashcardMock);
+      expect(listItem.first().props().openFlashcard).toEqual(propsSecondMock.openFlashcard);
     });
 
     it('passes the "openExerciseWindow" prop to ListItem component', () => {
-      expect(listItem.props().openExerciseWindow).toEqual(propsMock.openExerciseWindowMock);
+      expect(listItem.first().props().openExerciseWindow).toEqual(propsSecondMock.openExerciseWindow);
     });
 
     it('passes the "addWord" prop to the ListItem component', () => {
-      expect(listItem.props().addWord).toEqual(propsMock.addWordMock);
+      expect(listItem.first().props().addWord).toEqual(propsSecondMock.addWord);
     });
 
     it('passes the "deleteWord" prop to the ListItem component', () => {
-      expect(listItem.props().deleteWord).toEqual(propsMock.deleteWordMock);
+      expect(listItem.first().props().deleteWord).toEqual(propsSecondMock.deleteWord);
     });
   });
 });

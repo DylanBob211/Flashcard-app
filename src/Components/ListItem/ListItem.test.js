@@ -71,6 +71,11 @@ describe('ListItem', () => {
       mountedListItem = listItem(propsMock);
     });
 
+    it('matches the snapshot', () => {
+      const snapshotComp = listItem(propsMock, true);
+      expect(snapshotComp).toMatchSnapshot();
+    });
+
     it('always renders a div container', () => {
       const divContainer = mountedListItem.find('[data-test="listItemContainer"]');
       expect(divContainer.exists()).toEqual(true);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import ErrorModal from './ErrorModal';
 
 describe('ErrorModal', () => {
@@ -8,12 +8,17 @@ describe('ErrorModal', () => {
   const props = {
     text: '',
   };
-  const errorModal = ({ text }) => {
+  const errorModal = ({ text }, isShallow = false) => {
+    if (isShallow) return shallow(<ErrorModal text={text} />);
     return mount(<ErrorModal text={text} />);
   };
 
   beforeEach(() => {
     mountedErrorModal = undefined;
+  });
+
+  it('matches to snapshot', () => {
+    expect(errorModal(props, true)).toMatchSnapshot();
   });
 
   it('renders null if text prop is not passed', () => {

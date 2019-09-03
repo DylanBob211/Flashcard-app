@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './WordForm.css';
+import { useErrorContext } from '../../Contexts/ErrorContext';
 
 
-const WordForm = ({ addWord, handleError }) => {
+const WordForm = ({ addWord }) => {
+  const [, handleError] = useErrorContext();
   const [newWord, setNewWord] = useState('');
 
   const createNewWord = (e) => {
@@ -33,7 +35,6 @@ const WordForm = ({ addWord, handleError }) => {
 
 WordForm.propTypes = {
   addWord: PropTypes.func.isRequired,
-  handleError: PropTypes.func.isRequired,
 };
 
 export default WordForm;
