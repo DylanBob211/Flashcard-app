@@ -12,9 +12,9 @@ exports[`WordForm Component Matches to snapshot 1`] = `
     type="text"
     value=""
   />
-  <button
-    className="wordForm_btn"
-    type="submit"
+  <PlusIcon
+    className=""
+    disabled={true}
   />
 </form>
 `;
