@@ -9,16 +9,30 @@ const ListHeader = ({ listName, deleteList, openExerciseWindow }) => (
   <div className="listItem_header_container">
     <h2 className="listItem_title">{ listName }</h2>
     <div className="listItem_iconbox">
-      <TrashBinIcon onClick={() => deleteList(listName)} className="listItem_icon--trashbin" />
-      <PlayIcon className="listItem_icon--play" onClick={openExerciseWindow} />
+      <TrashBinIcon
+        disabled={!deleteList}
+        onClick={() => deleteList(listName)}
+        className="listItem_icon--trashbin"
+      />
+      <PlayIcon
+        disabled={!openExerciseWindow}
+        className="listItem_icon--play"
+        onClick={openExerciseWindow}
+      />
     </div>
   </div>
 );
 
 ListHeader.propTypes = {
-  listName: PropTypes.string.isRequired,
-  deleteList: PropTypes.func.isRequired,
-  openExerciseWindow: PropTypes.func.isRequired,
+  listName: PropTypes.string,
+  deleteList: PropTypes.func,
+  openExerciseWindow: PropTypes.func,
+};
+
+ListHeader.defaultProps = {
+  listName: '',
+  deleteList: null,
+  openExerciseWindow: null,
 };
 
 export default ListHeader;
