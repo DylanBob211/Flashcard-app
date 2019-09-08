@@ -3,11 +3,12 @@ import uuidv4 from 'uuidv4';
 import PropTypes from 'prop-types';
 import { useTransition, animated } from 'react-spring';
 import { useErrorContext } from '../../Contexts/ErrorContext';
+import { useListContext } from '../../Contexts/ListContext';
 import './ListForm.css';
 import PlusIcon from '../Icons/PlusIcon';
 import RemoveIcon from '../Icons/RemoveIcon';
 
-const ListForm = ({ addNewList }) => {
+const ListForm = () => {
   const [, handleError] = useErrorContext();
   const [newList, setNewList] = React.useState({
     words: [
@@ -19,6 +20,8 @@ const ListForm = ({ addNewList }) => {
   const listNameInput = useRef(null);
 
   const [isInputting, setIsInputting] = React.useState(false);
+  
+  const { addNewList } = useListContext();
 
   const openAddListTextInput = async () => {
     await setIsInputting(true);

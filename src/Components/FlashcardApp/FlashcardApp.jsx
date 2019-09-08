@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import initialState from '../initialState';
 import { useErrorContext } from '../../Contexts/ErrorContext';
+import { useListContext } from '../../Contexts/ListContext';
 import addNewListDependent from '../../Actions/listActions/addNewList';
 import deleteListDependent from '../../Actions/listActions/deleteList';
 import addWordDependent from '../../Actions/wordActions/addWordToList';
@@ -11,9 +12,10 @@ import PracticeWindow from '../PracticeWindow/PracticeWindow';
 import ErrorModal from '../ErrorModal/ErrorModal';
 
 const FlashcardApp = ({ languages }) => {
-  const [lists, setLists] = useState(initialState);
+  const [, setLists] = useState(initialState);
   const [windowState, setWindowState] = useState({ case: '', data: [] });
   const [error] = useErrorContext();
+  const { lists } = useListContext();
 
   /* handlers */
   const getFlashcardData = (listId, wordItem) => lists.filter(list => list.id === listId)[0]
