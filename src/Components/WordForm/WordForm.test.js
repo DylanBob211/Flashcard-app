@@ -31,7 +31,6 @@ describe('WordForm Component', () => {
   });
 
   describe('always', () => {
-
     beforeEach(() => {
       mountedWordForm = wordForm(props);
     });

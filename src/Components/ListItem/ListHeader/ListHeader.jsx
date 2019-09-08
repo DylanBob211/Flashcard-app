@@ -10,6 +10,7 @@ const ListHeader = ({ listName, deleteList, openExerciseWindow }) => (
     <h2 className="listItem_title">{ listName }</h2>
     <div className="listItem_iconbox">
       <TrashBinIcon
+        data-test="deleteListIconButton"
         disabled={!deleteList}
         onClick={() => deleteList(listName)}
         className="listItem_icon--trashbin"

@@ -27,12 +27,10 @@ import ListCollection from './ListCollection';
 describe('ListCollection', () => {
   let mountedListCollection;
   const propsMock = {
-    deleteList: jest.fn(),
     addWord: jest.fn(),
     deleteWord: jest.fn(),
     openFlashcard: jest.fn(),
     openExerciseWindow: jest.fn(),
-    addNewList: jest.fn(),
     lists: [],
   };
 
@@ -63,11 +61,6 @@ describe('ListCollection', () => {
     expect(listForm.exists()).toEqual(true);
   });
 
-  it('passes the "addNewList" prop to ListForm component', () => {
-    const listForm = mountedListCollection.find('ListForm');
-    expect(listForm.props().addNewList).toEqual(propsMock.addNewList);
-  });
-
   it('renders no ListItem if "lists" prop is an empty array', () => {
     listCollection(propsMock, false);
     expect(mountedListCollection.find('ListItem').exists()).toEqual(false);
@@ -94,12 +87,10 @@ describe('ListCollection', () => {
     ];
 
     const propsSecondMock = {
-      deleteList: jest.fn(),
       addWord: jest.fn(),
       deleteWord: jest.fn(),
       openFlashcard: jest.fn(),
       openExerciseWindow: jest.fn(),
-      addNewList: jest.fn(),
       lists: listArray,
     };
 
@@ -114,10 +105,6 @@ describe('ListCollection', () => {
   
     it('renders a ListItem component for each "list object" in the prop "lists"', () => {
       expect(listItem).toHaveLength(2);
-    });
-
-    it('passes the "deleteList" prop to ListItem component', () => {
-      expect(listItem.first().props().deleteList).toEqual(propsSecondMock.deleteList);
     });
 
     it('passes the "openFlashcard" prop to ListItem component', () => {

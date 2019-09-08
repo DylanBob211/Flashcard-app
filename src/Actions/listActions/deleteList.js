@@ -1,5 +1,5 @@
 
 
-export default (listName, setState) => {
+export default setState => (listName) => {
   setState(state => ([...state.filter(element => element.name !== listName)]));
 };

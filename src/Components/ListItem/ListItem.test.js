@@ -2,36 +2,6 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import ListItem from './ListItem';
 
-// What does it render?
-// It Always renders a div container
-// It Always renders a ListHeader component
-// It Always renders a WordForm component
-
-// Does my component render different things under different circumstances?
-// It renders a WordItem components for each element in the wordsArray prop
-
-// When i pass a function as a prop, what does my component use it for?
-// Does it call it, or just give it to another component
-// If it calls it, what does it call it with?
-
-// It calls the deleteWord function prop with listId prop as an argument
-// It passes the result to the WordItem component
-
-// It calls the openFlashcard function prop with listId prop as an argument
-// It passes the result to the WordItem component
-
-// It calls the openExerciseWindow function prop with listId prop as an argument
-// It passes the result to the ListHeader sub-component
-
-// It calls the openFlashcard function prop with listId prop as an argument
-// It passes the result to the WordForm component
-
-// It passes the listname prop to the ListHeader component
-// It passes the deleteList function prop to the ListHeader
-
-// When the user interacts with my component, what happens?
-// no public api
-
 describe('ListItem', () => {
   let mountedListItem;
   const listItem = (props, isShallow = false) => {

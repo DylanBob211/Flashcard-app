@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useListContext } from '../../Contexts/ListContext';
 import WordItem from '../WordItem/WordItem';
 import WordForm from '../WordForm/WordForm';
 import './ListItem.css';
@@ -7,9 +8,10 @@ import ListHeader from './ListHeader/ListHeader';
 
 
 const ListItem = ({
-  listId, wordsArray, listName, deleteList, addWord,
+  listId, wordsArray, listName, addWord,
   deleteWord, openFlashcard, openExerciseWindow,
 }) => {
+  const { deleteList } = useListContext();
   const listOfWords = wordsArray.map((word, index) => (
     <WordItem
       deleteWord={deleteWord(listId)}
@@ -45,7 +47,6 @@ ListItem.propTypes = {
     url: PropTypes.arrayOf(PropTypes.string).isRequired,
   })),
   listName: PropTypes.string,
-  deleteList: PropTypes.func.isRequired,
   addWord: PropTypes.func.isRequired,
   deleteWord: PropTypes.func.isRequired,
   openFlashcard: PropTypes.func.isRequired,

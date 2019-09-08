@@ -3,22 +3,6 @@ import { mount, shallow } from 'enzyme';
 import * as ErrorContext from '../../Contexts/ErrorContext';
 import FlashcardApp from './FlashcardApp';
 
-// What does it render?
-// It Always render a div container
-
-// Does my component render different things under different circumstances?
-// It renders ErrorModal component if a non-empty string is passed as a prop to it
-// It renders a ListCollection component if a non-empty array is passed as a "lists" prop
-// It renders a PracticeWindow component if an object with a field "case" equal to 'flashcard' or 'practise' is passed
-
-// When i pass a function as a prop, what does my component use it for?
-// Does it call it, or just give it to another component
-// If it calls it, what does it call it with?
-// It injects the setList into the actions that is going to pass to ListCollection
-
-// When the user interacts with my component, what happens?
-// no public api
-
 describe('FlashcardApp', () => {
   let mountedFlashcardAppComponent;
   let props = {

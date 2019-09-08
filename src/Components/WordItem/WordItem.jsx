@@ -42,11 +42,16 @@ const WordItem = ({
 WordItem.propTypes = {
   wordItem: PropTypes.shape({
     word: PropTypes.string.isRequired,
-    url: PropTypes.arrayOf(PropTypes.string.isRequired),
+    url: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
-  deleteWord: PropTypes.func.isRequired,
+  deleteWord: PropTypes.func,
   wordId: PropTypes.number.isRequired,
-  openFlashcard: PropTypes.func.isRequired,
+  openFlashcard: PropTypes.func,
+};
+
+WordItem.defaultProps = {
+  deleteWord: null,
+  openFlashcard: null,
 };
 
 

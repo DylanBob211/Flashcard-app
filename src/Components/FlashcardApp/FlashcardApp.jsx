@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import initialState from '../initialState';
 import { useErrorContext } from '../../Contexts/ErrorContext';
 import { useListContext } from '../../Contexts/ListContext';
-import addNewListDependent from '../../Actions/listActions/addNewList';
-import deleteListDependent from '../../Actions/listActions/deleteList';
 import addWordDependent from '../../Actions/wordActions/addWordToList';
 import deleteWordDependent from '../../Actions/wordActions/deleteWord';
 import ListCollection from '../ListCollection/ListCollection';
@@ -35,23 +33,18 @@ const FlashcardApp = ({ languages }) => {
   const closeExerciseWindow = () => {
     setWindowState(state => ({ ...state, case: '' }));
   };
-  // TODO: crera un hook esterno dove iniettare (in TDD) setList poi importalo e passalo da qui o usa un context (specialmente per add e delete word :DDD) :D
 
   /* setState injections */
   const addWord = addWordDependent(setLists);
   const deleteWord = deleteWordDependent(setLists);
-  const addNewList = newList => addNewListDependent(newList, setLists);
-  const deleteList = listName => deleteListDependent(listName, setLists);
 
 
   return (
     <div data-test="FlashcardAppContainer">
       <ErrorModal text={error} />
       <ListCollection
-        addNewList={addNewList}
         addWord={addWord}
         deleteWord={deleteWord}
-        deleteList={deleteList}
         lists={lists}
         getFlashcardData={getFlashcardData}
         openFlashcard={openFlashcard}

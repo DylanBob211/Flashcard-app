@@ -12,11 +12,14 @@ exports[`ListHeader matches to snapshot 1`] = `
   >
     <TrashBinIcon
       className="listItem_icon--trashbin"
+      data-test="deleteListIconButton"
+      disabled={true}
       onClick={[Function]}
     />
     <PlayIcon
       className="listItem_icon--play"
-      onClick={[MockFunction]}
+      disabled={true}
+      onClick={null}
     />
   </div>
 </div>

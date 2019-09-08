@@ -7,9 +7,9 @@ const ListContext = React.createContext([initialState, () => {}]);
 export const useListContext = () => useContext(ListContext);
 
 const ListProvider = ({ children }) => {
-  const { lists, setLists, addNewList } = useLists();
+  const listProps = useLists();
   return (
-    <ListContext.Provider value={{ lists, setLists, addNewList }}>
+    <ListContext.Provider value={{ ...listProps }}>
       {children}
     </ListContext.Provider>
   );

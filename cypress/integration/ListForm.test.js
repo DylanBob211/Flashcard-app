@@ -1,4 +1,6 @@
 describe('Adding a new list', () => {
+  const newList = 'newList';
+
   it('Adds a new ListItem component to the ListArray', () => {
     cy.visit('http://localhost:3000/main');
 
@@ -39,7 +41,7 @@ describe('Adding a new list', () => {
 
     // Inputting and saving should make a new List appear
     cy.get('[data-test="newListTextInput"]')
-      .type('New List');
+      .type(newList);
     // Inputting makes errorModal disappear
     cy.get('[data-test="errorModal"]')
       .should('not.exist');
@@ -47,7 +49,7 @@ describe('Adding a new list', () => {
     cy.get('[data-test="submitNewListButton"]')
       .click();
 
-    cy.contains('New List');
+    cy.contains(newList);
 
     // Once new list is created should close the form and display the button
 
