@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import uuidv4 from 'uuidv4';
-import PropTypes from 'prop-types';
 import { useTransition, animated } from 'react-spring';
 import { useErrorContext } from '../../Contexts/ErrorContext';
 import { useListContext } from '../../Contexts/ListContext';
@@ -20,7 +19,7 @@ const ListForm = () => {
   const listNameInput = useRef(null);
 
   const [isInputting, setIsInputting] = React.useState(false);
-  
+
   const { addNewList } = useListContext();
 
   const openAddListTextInput = async () => {
@@ -99,10 +98,6 @@ const ListForm = () => {
       }
     </div>
   );
-};
-
-ListForm.propTypes = {
-  addNewList: PropTypes.func.isRequired,
 };
 
 export default ListForm;

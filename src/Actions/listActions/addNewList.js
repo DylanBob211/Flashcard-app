@@ -1,4 +1,4 @@
 
-export default (newList, setState) => {
+export default setState => (newList) => {
   setState(state => ([...state, newList]));
 };

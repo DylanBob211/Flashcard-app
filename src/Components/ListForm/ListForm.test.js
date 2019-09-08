@@ -1,6 +1,7 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import uuidv4 from 'uuidv4';
+import * as ListContext from '../../Contexts/ListContext';
 import * as ErrorContext from '../../Contexts/ErrorContext';
 import ListForm from './ListForm';
 
@@ -8,13 +9,15 @@ jest.mock('uuidv4');
 
 describe('ListForm Component', () => {
   let component;
-  const addNewListMock = jest.fn();
   const handleErrorMock = jest.spyOn(ErrorContext, 'useErrorContext');
   const setErrorMock = jest.fn();
   handleErrorMock.mockImplementation(() => [null, setErrorMock]);
+  const addNewList = jest.fn();
+  const handleListMock = jest.spyOn(ListContext, 'useListContext');
+  handleListMock.mockReturnValue({ addNewList });
 
   beforeEach(() => {
-    component = mount(<ListForm addNewList={addNewListMock} />);
+    component = mount(<ListForm />);
     component
       .find('svg[data-test="addNewListButton"]')
       .simulate('click');
@@ -23,10 +26,6 @@ describe('ListForm Component', () => {
   afterEach(() => {
     jest.clearAllMocks();
     component.unmount();
-  });
-
-  it('matches the snapshot', () => {
-    expect(shallow(<ListForm addNewList={addNewListMock} />)).toMatchSnapshot();
   });
 
   it('renders the form when the plusIcon is pressed', () => {
@@ -43,7 +42,7 @@ describe('ListForm Component', () => {
     component
       .find('[data-test="submitNewListButton"]')
       .simulate('submit');
-    expect(addNewListMock).not.toHaveBeenCalled();
+    expect(addNewList).not.toHaveBeenCalled();
     expect(setErrorMock).toHaveBeenCalledWith('Input a name for the list');
   });
 
@@ -56,7 +55,7 @@ describe('ListForm Component', () => {
       .find('[data-test="submitNewListButton"]')
       .simulate('submit');
 
-    expect(addNewListMock).toHaveBeenCalledWith({
+    expect(addNewList).toHaveBeenCalledWith({
       words: [],
       name: 'NewList',
       id: 'mockedId',
