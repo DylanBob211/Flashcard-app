@@ -1,12 +1,9 @@
-
 export default unsplash => async (keyword) => {
-  if (!keyword) return { msg: 'No Query Inserted' };
-
+  if (!keyword) throw new Error('No keyword has been inserted');
   try {
     const photos = await unsplash.search.photos(keyword);
     return photos;
   } catch (e) {
-    console.log(e);
-    return { msg: 'Something went wrong' };
+    return { msg: e.message };
   }
 };

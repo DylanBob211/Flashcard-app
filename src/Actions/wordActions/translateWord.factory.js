@@ -1,17 +1,18 @@
-
-const translateWordFactory = deps => async (word) => {
-  if (!word) return { msg: 'No Word Inserted' };
+const translateWordFactory = ({ axios }) => async (word, languageCodePair = 'it-en', proxy = 'http://localhost:5000/') => {
+  if (!word) throw new Error('No word to translate has been inserted');
+  if (typeof word !== 'string') throw new Error('Invalid input type');
 
   try {
-    const res = await deps.axios.post('http://localhost:5000/', {
+    const res = await axios.post(proxy, {
       word,
-      lang: 'it-en',
+      lang: languageCodePair,
     });
 
     return res.data.text[0];
   } catch (e) {
+    console.warn(e.message);
     return {
-      msg: 'Something went wrong',
+      msg: 'Something went wrong with the server',
     };
   }
 };

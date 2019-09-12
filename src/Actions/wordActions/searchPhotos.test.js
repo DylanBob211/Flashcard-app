@@ -1,40 +1,23 @@
-/* eslint-disable */
 import searchPhotosFactory from './searchPhotos.factory';
 
-// mocking deps
-
-let isMocksplashMethodCalled = false;
-
-const Mocksplash = function() {
-  this.search = {
-    photos: async function(keyword){
-      isMocksplashMethodCalled = true;
-      return { res : ['url1', 'url2', 'url3'] }    
-    }
-  }
-}
-
 describe('searchPhotos', () => {
-  let unsplash;
   let searchPhotos;
+  const unsplashMock = {
+    search: {
+      photos: jest.fn(() => ['urlOne', 'urlTwo']),
+    },
+  };
+
   beforeEach(() => {
-    unsplash = new Mocksplash();
-    searchPhotos = searchPhotosFactory(unsplash);
+    searchPhotos = searchPhotosFactory(unsplashMock);
   });
 
-  it('sends warning message if no query has been inserted', () => {
-    searchPhotos().then(res => expect(res).toMatchObject({ msg: 'No Query Inserted'}));
-  })
+  it('throws an error if no argument is passed', async () => {
+    expect(searchPhotos()).rejects.toEqual(new Error('No keyword has been inserted'));
+  });
 
-  it('calls unsplash correctly', () => {
-    return searchPhotos('some')
-    .then(res => {
-      expect(isMocksplashMethodCalled).toBe(true)
-    })
-  })
-
-  it('returns an array...almost testable', () => {
-    return searchPhotos('some')
-    .then(res => expect(typeof res).toBe('object'))
-  })
+  it('calls the unsplash search method correctly', () => {
+    searchPhotos('hello');
+    expect(unsplashMock.search.photos).toHaveBeenCalledWith('hello');
+  });
 });
