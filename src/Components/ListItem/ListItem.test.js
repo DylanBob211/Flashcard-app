@@ -1,8 +1,21 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import ListItem from './ListItem';
+import * as ListContext from '../../Contexts/ListContext';
 
 describe('ListItem', () => {
+  const useListContext = jest.spyOn(ListContext, 'useListContext');
+  const addWord = jest.fn();
+  const deleteWord = jest.fn();
+  const addNewList = jest.fn();
+  const deleteList = jest.fn();
+  useListContext.mockImplementation(() => ({
+    addNewList,
+    deleteList,
+    addWord,
+    deleteWord,
+  }));
+
   let mountedListItem;
   const listItem = (props, isShallow = false) => {
     const compJsx = (
@@ -26,17 +39,15 @@ describe('ListItem', () => {
       listId: 'listIdMock',
       wordsArray: [],
       listName: 'listNameMock',
-      deleteList: jest.fn(),
-      addWord: jest.fn(),
-      deleteWord: jest.fn(),
+      deleteWord,
       openFlashcard: jest.fn(),
       openExerciseWindow: jest.fn(),
     };
 
     beforeEach(() => {
-      propsMock.addWord.mockReturnValue(() => {});
+      addWord.mockReturnValue(() => {});
+      deleteWord.mockReturnValue(() => {});
       propsMock.openExerciseWindow.mockReturnValue(() => {});
-      propsMock.deleteWord.mockReturnValue(() => {});
       propsMock.openFlashcard.mockReturnValue(() => {});
       mountedListItem = listItem(propsMock);
     });
@@ -73,14 +84,14 @@ describe('ListItem', () => {
       expect(listHeader.props().openExerciseWindow).toEqual(curried);
     });
 
-    it('curries the addWord prop with the listId', () => {
-      const { addWord, listId } = propsMock;
+    it('curries `addWord` with `listId`', () => {
+      const { listId } = propsMock;
       expect(addWord).toHaveBeenCalledWith(listId);
     });
 
-    it('passes it the curried addWord to the WordForm component', () => {
+    it('passes the curried `addWord` to the WordForm component', () => {
       const wordForm = mountedListItem.find('WordForm');
-      const { addWord, listId } = propsMock;
+      const { listId } = propsMock;
       const curried = addWord(listId);
       expect(wordForm.props().addWord).toEqual(curried);
     });
@@ -96,7 +107,6 @@ describe('ListItem', () => {
       listId: 'listIdMock',
       wordsArray,
       listName: 'listNameMock',
-      deleteList: jest.fn(),
       addWord: jest.fn(),
       deleteWord: jest.fn(),
       openFlashcard: jest.fn(),
@@ -112,13 +122,13 @@ describe('ListItem', () => {
     });
 
     it('curries the deleteWord prop with the listId', () => {
-      const { deleteWord, listId } = propsMock;
+      const { listId } = propsMock;
       expect(deleteWord).toHaveBeenCalledWith(listId);
     });
 
     it('passes it the curried deleteWord to the WordItem component', () => {
       const wordItem = mountedListItem.find('WordItem');
-      const { deleteWord, listId } = propsMock;
+      const { listId } = propsMock;
       const curried = deleteWord(listId);
       expect(wordItem.first().props().deleteWord).toEqual(curried);
     });

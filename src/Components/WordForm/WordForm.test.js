@@ -7,6 +7,7 @@ describe('WordForm Component', () => {
   const handleError = jest.fn();
   const useErrorContext = jest.spyOn(ErrorContext, 'useErrorContext');
   useErrorContext.mockImplementation(() => [null, handleError]);
+  const langToPair = 'it'; // You get it from a context; hardcoded for now
 
   let mountedWordForm;
 
@@ -57,7 +58,6 @@ describe('WordForm Component', () => {
   });
 
   describe('when `addWord` is passed and a language has been chosen to translate from', () => {
-    const langToPair = 'it'; // You get it from a context; hardcoded for now
     beforeEach(() => {
       props.addWord = jest.fn();
       mountedWordForm = wordForm(props);
@@ -97,7 +97,7 @@ describe('WordForm Component', () => {
         });
 
         it('calls addWord with the input inserted', () => {
-          expect(props.addWord).toHaveBeenCalledWith(testInput);
+          expect(props.addWord).toHaveBeenCalledWith(testInput, langToPair);
         });
 
         it('empties the input', () => {

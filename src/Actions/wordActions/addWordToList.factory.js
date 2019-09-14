@@ -8,7 +8,6 @@ export default ({ translateWord, searchPhotos }) =>
       word,
       url: [],
     };
-
     try {
       const wordTranslated = await translateWord(word, `${langToPair}-en`);
       const photos = await searchPhotos(wordTranslated);

@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import initialState from '../initialState';
 import { useErrorContext } from '../../Contexts/ErrorContext';
 import { useListContext } from '../../Contexts/ListContext';
-import addWordDependent from '../../Actions/wordActions/addWordToList';
-import deleteWordDependent from '../../Actions/wordActions/deleteWord';
 import ListCollection from '../ListCollection/ListCollection';
 import PracticeWindow from '../PracticeWindow/PracticeWindow';
 import ErrorModal from '../ErrorModal/ErrorModal';
 
 const FlashcardApp = ({ languages }) => {
-  const [, setLists] = useState(initialState);
   const [windowState, setWindowState] = useState({ case: '', data: [] });
   const [error] = useErrorContext();
   const { lists } = useListContext();
