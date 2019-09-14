@@ -8,10 +8,10 @@ import ListHeader from './ListHeader/ListHeader';
 
 
 const ListItem = ({
-  listId, wordsArray, listName, addWord,
-  deleteWord, openFlashcard, openExerciseWindow,
+  listId, wordsArray, listName,
+  openFlashcard, openExerciseWindow,
 }) => {
-  const { deleteList } = useListContext();
+  const { deleteList, addWord, deleteWord } = useListContext();
   const listOfWords = wordsArray.map((word, index) => (
     <WordItem
       deleteWord={deleteWord(listId)}
@@ -47,8 +47,6 @@ ListItem.propTypes = {
     url: PropTypes.arrayOf(PropTypes.string).isRequired,
   })),
   listName: PropTypes.string,
-  addWord: PropTypes.func.isRequired,
-  deleteWord: PropTypes.func.isRequired,
   openFlashcard: PropTypes.func.isRequired,
   openExerciseWindow: PropTypes.func.isRequired,
 };

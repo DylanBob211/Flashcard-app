@@ -11,6 +11,10 @@ const WordItem = ({
   const handleMouseOver = () => {
     setMouseOver(!isMouseOver);
   };
+  const handleDeleteClick = (e) => {
+    e.stopPropagation();
+    deleteWord(wordItem.word, wordId);
+  };
 
   return (
     <div
@@ -23,16 +27,19 @@ const WordItem = ({
       onClick={() => openFlashcard(wordItem)}
       onKeyPress={() => openFlashcard(wordItem)}
     >
-      <FlashcardPreview
-        name={wordItem.word}
-        picUrls={wordItem.url}
-        isMouseOver={isMouseOver}
-      />
+      {isMouseOver && (
+        <FlashcardPreview
+          name={wordItem.word}
+          imgUrls={wordItem.url}
+          toggleVisibility={isMouseOver}
+        />
+      )}
       <div className="wordItem_container">
         <li className="wordItem_name">{wordItem.word}</li>
         <RemoveIcon
           className="wordItem_remove"
-          onClick={() => deleteWord(wordItem.word, wordId)}
+          disabled={!deleteWord}
+          onClick={e => handleDeleteClick(e)}
         />
       </div>
     </div>

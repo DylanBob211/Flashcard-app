@@ -34,17 +34,10 @@ const FlashcardApp = ({ languages }) => {
     setWindowState(state => ({ ...state, case: '' }));
   };
 
-  /* setState injections */
-  const addWord = addWordDependent(setLists);
-  const deleteWord = deleteWordDependent(setLists);
-
-
   return (
     <div data-test="FlashcardAppContainer">
       <ErrorModal text={error} />
       <ListCollection
-        addWord={addWord}
-        deleteWord={deleteWord}
         lists={lists}
         getFlashcardData={getFlashcardData}
         openFlashcard={openFlashcard}

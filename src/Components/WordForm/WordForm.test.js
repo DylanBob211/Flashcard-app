@@ -56,7 +56,8 @@ describe('WordForm Component', () => {
     });
   });
 
-  describe('when `addWord` is passed', () => {
+  describe('when `addWord` is passed and a language has been chosen to translate from', () => {
+    const langToPair = 'it'; // You get it from a context; hardcoded for now
     beforeEach(() => {
       props.addWord = jest.fn();
       mountedWordForm = wordForm(props);
@@ -89,7 +90,7 @@ describe('WordForm Component', () => {
         expect(input.props().value).toEqual(testInput);
       });
 
-      describe('when submitting', () => {
+      describe('then submitting', () => {
         beforeEach(() => {
           const plusIcon = mountedWordForm.find('PlusIcon');
           plusIcon.simulate('submit');

@@ -5,7 +5,7 @@ import './ListCollection.css';
 import ListForm from '../ListForm/ListForm';
 
 const ListCollection = ({
-  lists, addWord, deleteWord, openFlashcard, openExerciseWindow,
+  lists, openFlashcard, openExerciseWindow,
 }) => (
   <div
     className="lists_container"
@@ -13,8 +13,6 @@ const ListCollection = ({
   >
     {lists.map(listItem => (
       <ListItem
-        addWord={addWord}
-        deleteWord={deleteWord}
         key={listItem.id}
         listId={listItem.id}
         listName={listItem.name}
@@ -38,8 +36,6 @@ ListCollection.propTypes = {
       }).isRequired,
     ),
   })),
-  addWord: PropTypes.func.isRequired,
-  deleteWord: PropTypes.func.isRequired,
   openFlashcard: PropTypes.func.isRequired,
   openExerciseWindow: PropTypes.func.isRequired,
 };

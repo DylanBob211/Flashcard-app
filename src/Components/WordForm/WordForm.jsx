@@ -9,13 +9,18 @@ const WordForm = ({ addWord }) => {
   const [, handleError] = useErrorContext();
   const [newWord, setNewWord] = useState('');
 
-  const createNewWord = (e) => {
+  const createNewWord = async (e) => {
     e.preventDefault();
     if (!newWord) {
       handleError('Add a word first');
     }
-    addWord(newWord);
-    setNewWord('');
+    try {
+      await addWord(newWord, 'it'); // TODO: remove hardcoded lang
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setNewWord('');
+    }
   };
 
   const handleChange = (e) => {

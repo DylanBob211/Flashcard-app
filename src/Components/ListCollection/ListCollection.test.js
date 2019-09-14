@@ -114,13 +114,5 @@ describe('ListCollection', () => {
     it('passes the "openExerciseWindow" prop to ListItem component', () => {
       expect(listItem.first().props().openExerciseWindow).toEqual(propsSecondMock.openExerciseWindow);
     });
-
-    it('passes the "addWord" prop to the ListItem component', () => {
-      expect(listItem.first().props().addWord).toEqual(propsSecondMock.addWord);
-    });
-
-    it('passes the "deleteWord" prop to the ListItem component', () => {
-      expect(listItem.first().props().deleteWord).toEqual(propsSecondMock.deleteWord);
-    });
   });
 });
