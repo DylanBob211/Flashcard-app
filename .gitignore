@@ -9,7 +9,6 @@
 /.pnp
 .pnp.js
 .thinking.txt
-.hello.js
 
 # testing
 /coverage
@@ -19,6 +18,7 @@
 /build
 
 # misc
+.hello.js
 .DS_Store
 .env.local
 .env.development.local
