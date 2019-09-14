@@ -28,5 +28,7 @@ module.exports = {
     "import/no-extraneous-dependencies" : ["error", { devDependencies: true }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/no-array-index-key": 0,
+    "no-use-before-define": 0,
+    "no-shadow": 0,
   },
 };

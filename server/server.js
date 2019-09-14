@@ -17,20 +17,20 @@ app.post('/', (req, res) => {
     url: `${URL}/translate`,
     qs: {
       key,
-      lang: req.body.lang || 'it-ru',
+      lang: req.body.lang,
     },
     headers: {
       'cache-control': 'no-cache',
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     form: {
-      text: req.body.word || 'gatto',
+      text: req.body.word,
       undefined,
     },
   };
 
   request(options, (error, response, body) => {
-    if (error) throw new Error(error);
+    if (error) res.status(400).send(error);
     res.send(body);
   });
 });
