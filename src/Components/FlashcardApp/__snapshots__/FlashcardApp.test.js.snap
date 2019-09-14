@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FlashcardApp matches the snapshot 1`] = `
+<div
+  data-test="FlashcardAppContainer"
+>
+  <ErrorModal
+    text="hello error"
+  />
+  <ListCollection
+    getFlashcardData={[Function]}
+    lists={Array []}
+    openExerciseWindow={[Function]}
+    openFlashcard={[Function]}
+  />
+  <PracticeWindow
+    closeExerciseWindow={[Function]}
+    windowState={
+      Object {
+        "case": "",
+        "data": Array [],
+      }
+    }
+  />
+</div>
+`;

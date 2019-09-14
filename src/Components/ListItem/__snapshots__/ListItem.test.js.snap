@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListItem when wordsArray prop empty matches the snapshot 1`] = `
+<div
+  className="listItem_container"
+  data-test="listItemContainer"
+>
+  <ListHeader
+    deleteList={[MockFunction]}
+    listName="listNameMock"
+    openExerciseWindow={[Function]}
+  />
+  <ul
+    className="listItem_wordList"
+  />
+  <WordForm
+    addWord={[Function]}
+  />
+</div>
+`;
