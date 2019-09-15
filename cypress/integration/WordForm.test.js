@@ -1,33 +1,16 @@
-import createList from '../helpers/createList';
+import createWord from '../helpers/createWord';
+import mockServer from '../helpers/mockServer';
 
 describe('Adding a word to a list', () => {
   const listName = 'Hello List';
-  const wordName = 'Test word'
+  const wordName = 'Test word';
   it('adds a word to a list', () => {
-    cy.server();
-    cy.route({
-      method: 'POST',
-      url: '/translate',
-      response: [{ name: 'sth' }],
-    });
-
+    mockServer();
     cy.visit('http://localhost:3000/main');
 
-    createList(listName);
+    createWord(wordName, listName);
 
-    cy.contains(listName)
-      .parent()
-      .siblings('.wordForm_container')
-      .children('.wordForm_input')
-      .type(wordName);
-
-    cy.contains(listName)
-      .parent()
-      .siblings('.wordForm_container')
-      .children('[data-test="addWordButtonTest"]')
-      .click();
-
-    cy.contains(wordName);
+    cy.contains(wordName).should('exist');
 
   });
 });
