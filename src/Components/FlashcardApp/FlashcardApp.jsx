@@ -10,8 +10,7 @@ const FlashcardApp = ({ languages }) => {
   const [windowState, setWindowState] = useState({ case: '', data: [] });
   const [error] = useErrorContext();
   const { lists } = useListContext();
-
-  console.log(process.env);
+  
   /* handlers */
   const getFlashcardData = (listId, wordItem) => lists.filter(list => list.id === listId)[0]
     .words.filter(word => word.word === wordItem.word);

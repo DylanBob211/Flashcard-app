@@ -22,7 +22,7 @@ describe('translateWord', () => {
     it('calls axios with word argument passed and default arguments', async () => {
       translateWord('hello');
       expect(axios.post).toHaveBeenCalledWith(
-        'http://localhost:5000/',
+        'http://localhost:5000/translate',
         {
           word: 'hello',
           lang: 'it-en',

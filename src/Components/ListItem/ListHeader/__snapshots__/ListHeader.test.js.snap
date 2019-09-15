@@ -18,6 +18,7 @@ exports[`ListHeader matches to snapshot 1`] = `
     />
     <PlayIcon
       className="listItem_icon--play"
+      data-test="startListPracticeSessionButton"
       disabled={true}
       onClick={null}
     />

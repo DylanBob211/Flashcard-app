@@ -35,3 +35,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+form.hide-submit input[type="submit"] { 
+  display: none;
+}

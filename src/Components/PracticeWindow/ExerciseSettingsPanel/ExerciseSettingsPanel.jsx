@@ -14,7 +14,9 @@ const ExerciseSettingsPanel = ({ data }) => {
   };
 
   const PracticePannel = () => (
-    <>
+    <div
+      data-test="exerciseSettingsPanelTest"
+    >
       <h2>{data.name}</h2>
       <div className="exerciseForm_btnContainer">
         <button className="exerciseForm_btn selected" type="button" onClick={e => selectExerciseType(e)} value="Guess the flashcard">Guess The Flashcard</button>
@@ -22,7 +24,7 @@ const ExerciseSettingsPanel = ({ data }) => {
         <button className="exerciseForm_btn" type="button" onClick={e => selectExerciseType(e)} value="Translate from target">Translate From Target Language</button>
       </div>
       <PlayIcon customFunction={() => startPracticeSession()} classIcon="exerciseForm_startBtn" />
-    </>
+    </div>
   );
   return (
     <>

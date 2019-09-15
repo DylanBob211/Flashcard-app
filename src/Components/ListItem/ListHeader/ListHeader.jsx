@@ -16,6 +16,7 @@ const ListHeader = ({ listName, deleteList, openExerciseWindow }) => (
         className="listItem_icon--trashbin"
       />
       <PlayIcon
+        data-test="startListPracticeSessionButton"
         disabled={!openExerciseWindow}
         className="listItem_icon--play"
         onClick={openExerciseWindow}

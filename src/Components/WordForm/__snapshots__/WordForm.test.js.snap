@@ -2,7 +2,7 @@
 
 exports[`WordForm Component Matches to snapshot 1`] = `
 <form
-  className="wordForm_container"
+  className="wordForm_container hide-submit"
   onSubmit={[Function]}
 >
   <input
@@ -12,9 +12,16 @@ exports[`WordForm Component Matches to snapshot 1`] = `
     type="text"
     value=""
   />
-  <PlusIcon
-    className=""
-    disabled={true}
-  />
+  <label
+    data-test="addWordButtonTest"
+  >
+    <input
+      type="submit"
+    />
+    <PlusIcon
+      className=""
+      disabled={true}
+    />
+  </label>
 </form>
 `;

@@ -30,7 +30,10 @@ const WordForm = ({ addWord }) => {
   };
 
   return (
-    <form className="wordForm_container" onSubmit={e => createNewWord(e)}>
+    <form
+      className="wordForm_container hide-submit"
+      onSubmit={e => createNewWord(e)}
+    >
       <input
         className="wordForm_input"
         type="text"
@@ -38,7 +41,12 @@ const WordForm = ({ addWord }) => {
         value={newWord}
         placeholder="Add word here..."
       />
-      <PlusIcon disabled={!addWord} />
+      <label data-test="addWordButtonTest">
+        <input type="submit" />
+        <PlusIcon
+          disabled={!addWord}
+        />
+      </label>
     </form>
   );
 };
