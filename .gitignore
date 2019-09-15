@@ -28,3 +28,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/Actions/practiceActions/shuffle.sandbox.js src/Actions/wordActions/translateWord.sandbox.js
