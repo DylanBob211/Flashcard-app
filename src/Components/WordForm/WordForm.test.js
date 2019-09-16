@@ -59,7 +59,7 @@ describe('WordForm Component', () => {
 
   describe('when `addWord` is passed and a language has been chosen to translate from', () => {
     beforeEach(() => {
-      props.addWord = jest.fn();
+      props.addWord = jest.fn(async () => {});
       mountedWordForm = wordForm(props);
     });
 

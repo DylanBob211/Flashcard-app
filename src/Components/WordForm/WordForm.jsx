@@ -14,13 +14,10 @@ const WordForm = ({ addWord }) => {
     if (!newWord) {
       handleError('Add a word first');
     }
-    try {
-      addWord(newWord, 'it'); // TODO: remove hardcoded lang
-    } catch (error) {
-      console.log(error.message);
-    } finally {
-      setNewWord('');
-    }
+    addWord(newWord, 'it')
+      .catch(error => console.error(error.message));
+
+    setNewWord('');
   };
 
   const handleChange = (e) => {
