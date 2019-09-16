@@ -24,7 +24,7 @@ const FlashcardApp = ({ languages }) => {
 
   const openExerciseWindow = listId => () => {
     const listToPracticeData = getListData(listId);
-    setWindowState({ case: 'practise', data: listToPracticeData });
+    setWindowState({ case: 'list', data: listToPracticeData });
   };
   const closeExerciseWindow = () => {
     setWindowState(state => ({ ...state, case: '' }));

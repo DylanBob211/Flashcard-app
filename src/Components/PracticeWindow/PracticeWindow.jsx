@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import useOutsideClick from '../../Hooks/useOutsideHandler';
 import './PracticeWindow.css';
@@ -12,8 +12,7 @@ const PracticeWindow = ({ windowState, closeExerciseWindow }) => {
 
   switch (windowState.case) {
     case 'flashcard': return practiceWindowWrapper(Flashcard, windowState.data);
-    case 'practise': return practiceWindowWrapper(ExerciseSettingsPanel, windowState.data);
-    case '': return null;
+    case 'list': return practiceWindowWrapper(ExerciseSettingsPanel, windowState.data);
     default: return null;
   }
 };
@@ -21,9 +20,13 @@ const PracticeWindow = ({ windowState, closeExerciseWindow }) => {
 PracticeWindow.propTypes = {
   windowState: PropTypes.shape({
     case: PropTypes.string,
-    data: PropTypes.array || PropTypes.object, // TODO: non funziona, ma per capirci che qualcosa va fatto
-  }).isRequired,
+    data: PropTypes.array,
+  }),
   closeExerciseWindow: PropTypes.func.isRequired,
+};
+
+PracticeWindow.defaultProps = {
+  windowState: { case: '', data: [] },
 };
 
 export default PracticeWindow;
