@@ -34,11 +34,10 @@ describe('PracticeWindow', () => {
         mountedPracticeWindow = testWrapper(PracticeWindow, props);
       });
 
-      it('renders a composed Flashcard component', () => {
+      it('renders a WindowFlashcard component', () => {
         const flashcardComponent = mountedPracticeWindow
           .find('Flashcard');
         expect(flashcardComponent.exists()).toEqual(true);
-        expect(flashcardComponent.parent().props().className).toEqual('practiceWindow_container');
       });
 
       it('passes `data` key reference to the Flashcard component', () => {

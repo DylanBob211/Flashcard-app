@@ -1,6 +1,7 @@
-/* eslint-disable react/no-array-index-key */
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import withWindowWrapper from '../../HOC/withWindowWrapper';
+
 const NO_IMG = require('../../../Assets/imgs/no_img.svg');
 
 const Flashcard = ({ data }) => {
@@ -33,4 +34,4 @@ Flashcard.propTypes = {
   })).isRequired,
 };
 
-export default Flashcard;
+export default withWindowWrapper(Flashcard);

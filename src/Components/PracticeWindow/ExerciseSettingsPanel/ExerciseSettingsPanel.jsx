@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import withWindowWrapper from '../../HOC/withWindowWrapper';
 import PlayIcon from '../../Icons/PlayIcon';
 import PracticeSession from './PracticeSession/PracticeSession';
 
@@ -19,11 +20,35 @@ const ExerciseSettingsPanel = ({ data }) => {
     >
       <h2>{data.name}</h2>
       <div className="exerciseForm_btnContainer">
-        <button className="exerciseForm_btn selected" type="button" onClick={e => selectExerciseType(e)} value="Guess the flashcard">Guess The Flashcard</button>
-        <button className="exerciseForm_btn" type="button" onClick={e => selectExerciseType(e)} value="Translate to target">Translate To Target Language</button>
-        <button className="exerciseForm_btn" type="button" onClick={e => selectExerciseType(e)} value="Translate from target">Translate From Target Language</button>
+        <button
+          className="exerciseForm_btn selected"
+          type="button"
+          onClick={e => selectExerciseType(e)}
+          value="Guess the flashcard"
+        >
+          Guess The Flashcard
+        </button>
+        <button
+          className="exerciseForm_btn"
+          type="button"
+          onClick={e => selectExerciseType(e)}
+          value="Translate to target"
+        >
+          Translate To Target Language
+        </button>
+        <button
+          className="exerciseForm_btn"
+          type="button"
+          onClick={e => selectExerciseType(e)}
+          value="Translate from target"
+        >
+          Translate From Target Language
+        </button>
       </div>
-      <PlayIcon customFunction={() => startPracticeSession()} classIcon="exerciseForm_startBtn" />
+      <PlayIcon
+        onClick={() => startPracticeSession()}
+        className="exerciseForm_startBtn"
+      />
     </div>
   );
   return (
@@ -50,4 +75,4 @@ ExerciseSettingsPanel.propTypes = {
 };
 
 
-export default ExerciseSettingsPanel;
+export default withWindowWrapper(ExerciseSettingsPanel);
