@@ -10,18 +10,20 @@ const PracticeWindow = ({ windowState, closeExerciseWindow }) => {
   useOutsideClick(refWrapper, closeExerciseWindow);
 
   return (
-    <div
-      ref={refWrapper}
-      className="practiceWindow_container"
-    >
-      {(function () {
-        switch (windowState.case) {
-          case 'flashcard': return <Flashcard data={windowState.data} />;
-          case 'list': return <ExerciseSettingsPanel data={windowState.data} />;
-          default: return null;
-        }
-      })()}
-    </div>
+    windowState.case && (
+      <div
+        ref={refWrapper}
+        className="practiceWindow_container"
+      >
+        {(function renderSwitch() {
+          switch (windowState.case) {
+            case 'flashcard': return <Flashcard data={windowState.data} />;
+            case 'list': return <ExerciseSettingsPanel data={windowState.data} />;
+            default: return null;
+          }
+        }())}
+      </div>
+    )
   );
 };
 
