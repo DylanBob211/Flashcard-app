@@ -29,8 +29,8 @@ const PracticeWindow = ({ windowState, closeExerciseWindow }) => {
 
 PracticeWindow.propTypes = {
   windowState: PropTypes.shape({
-    case: PropTypes.string,
-    data: PropTypes.array,
+    case: PropTypes.oneOf(['', 'flashcard', 'list']),
+    data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   }),
   closeExerciseWindow: PropTypes.func.isRequired,
 };

@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 const NO_IMG = require('../../../Assets/imgs/no_img.svg');
 
 const Flashcard = ({ data }) => {
-  const { word, url } = data[0];
+  const { word, url } = data;
+
+  console.log(data);
+
 
   const renderImg = () => {
     if (url[0] === 'No Img Available' || url[0] === '') {
@@ -27,10 +30,17 @@ const Flashcard = ({ data }) => {
 };
 
 Flashcard.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
+  data: PropTypes.shape({
     word: PropTypes.string,
     url: PropTypes.arrayOf(PropTypes.string),
-  })).isRequired,
+  }),
+};
+
+Flashcard.defaultProps = {
+  data: {
+    word: '(no word)',
+    url: ['No Img Available'],
+  },
 };
 
 export default Flashcard;
