@@ -1,15 +1,28 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import useOutsideClick from '../../Hooks/useOutsideHandler';
 import './PracticeWindow.css';
 import Flashcard from './Flashcard/Flashcard';
-import ExercisePanel from './ExerciseSettingsPanel/ExerciseSettingsPanel';
+import ExerciseSettingsPanel from './ExerciseSettingsPanel/ExerciseSettingsPanel';
 
 const PracticeWindow = ({ windowState, closeExerciseWindow }) => {
-  switch (windowState.case) {
-    case 'flashcard': return <Flashcard data={windowState.data} closeWindowFunction={closeExerciseWindow} />;
-    case 'list': return <ExercisePanel data={windowState.data} closeWindowFunction={closeExerciseWindow} />;
-    default: return null;
-  }
+  const refWrapper = useRef(null);
+  useOutsideClick(refWrapper, closeExerciseWindow);
+
+  return (
+    <div
+      ref={refWrapper}
+      className="practiceWindow_container"
+    >
+      {(function () {
+        switch (windowState.case) {
+          case 'flashcard': return <Flashcard data={windowState.data} />;
+          case 'list': return <ExerciseSettingsPanel data={windowState.data} />;
+          default: return null;
+        }
+      })()}
+    </div>
+  );
 };
 
 PracticeWindow.propTypes = {

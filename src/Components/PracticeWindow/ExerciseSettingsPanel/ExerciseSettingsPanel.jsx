@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import withWindowWrapper from '../../HOC/withWindowWrapper';
 import PlayIcon from '../../Icons/PlayIcon';
 import PracticeSession from './PracticeSession/PracticeSession';
 
@@ -75,4 +74,4 @@ ExerciseSettingsPanel.propTypes = {
 };
 
 
-export default withWindowWrapper(ExerciseSettingsPanel);
+export default ExerciseSettingsPanel;

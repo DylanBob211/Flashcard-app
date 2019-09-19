@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withWindowWrapper from '../../HOC/withWindowWrapper';
 
 const NO_IMG = require('../../../Assets/imgs/no_img.svg');
 
@@ -34,4 +33,4 @@ Flashcard.propTypes = {
   })).isRequired,
 };
 
-export default withWindowWrapper(Flashcard);
+export default Flashcard;

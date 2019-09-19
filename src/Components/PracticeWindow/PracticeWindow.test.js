@@ -21,30 +21,31 @@ describe('PracticeWindow', () => {
       mountedPracticeWindow = testWrapper(PracticeWindow, props);
     });
 
-    it('renders null', () => {
-      expect(mountedPracticeWindow.isEmptyRender()).toEqual(true);
+    it('renders a div container', () => {
+      const divContainer = mountedPracticeWindow.find('.practiceWindow_container'); 
+      expect(divContainer.exists()).toEqual(true);
     });
 
     describe('when a windowState object is passed with key `case` = `flashcard`', () => {
+      let flashcardComponent;
       beforeEach(() => {
         props.windowState = {
           case: 'flashcard',
           data: [{ word: 'someData', url: [] }],
         };
         mountedPracticeWindow = testWrapper(PracticeWindow, props);
+        flashcardComponent = mountedPracticeWindow
+          .find('Flashcard');
       });
 
-      it('renders a WindowFlashcard component', () => {
-        const flashcardComponent = mountedPracticeWindow
-          .find('Flashcard');
+      it('renders a Flashcard component', () => {
         expect(flashcardComponent.exists()).toEqual(true);
       });
 
       it('passes `data` key reference to the Flashcard component', () => {
-        const flashcardComponent = mountedPracticeWindow
-          .find('Flashcard');
         expect(flashcardComponent.props().data).toEqual([{ word: 'someData', url: [] }]);
       });
+
     });
 
     describe('when a windowState object is passed with key `case` = `list', () => {
@@ -53,14 +54,13 @@ describe('PracticeWindow', () => {
           case: 'list',
           data: ['someData'],
         };
-        mountedPracticeWindow = testWrapper(PracticeWindow, props, true);
+        mountedPracticeWindow = testWrapper(PracticeWindow, props);
       });
 
       it('renders a composed ExerciseSettingsPanel component', () => {
         const panelComponent = mountedPracticeWindow
           .find('ExerciseSettingsPanel');
         expect(panelComponent.exists()).toEqual(true);
-        expect(panelComponent.parent().props().className).toEqual('practiceWindow_container');
       });
 
       it('passes `data` key reference to the ExerciseSettingsPanel component', () => {
