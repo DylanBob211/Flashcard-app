@@ -34,7 +34,7 @@ describe('PracticeWindow', () => {
     beforeEach(() => {
       props.windowState = {
         case: 'flashcard',
-        data: [],
+        data: { word: 'someData', url: ['No Img Available'] },
       };
       mountedPracticeWindow = testWrapper(PracticeWindow, props);
     });
@@ -58,7 +58,7 @@ describe('PracticeWindow', () => {
       const props = {
         windowState: {
           case: 'flashcard',
-          data: [],
+          data: { word: 'someData', url: ['No Img Available'] },
         },
         closeExerciseWindow: jest.fn(),
       };
@@ -88,7 +88,7 @@ describe('PracticeWindow', () => {
       });
 
       it('passes `data` key reference to the Flashcard component', () => {
-        expect(flashcardComponent.props().data).toEqual([{ word: 'someData', url: [] }]);
+        expect(flashcardComponent.props().data).toEqual({ word: 'someData', url: ['No Img Available'] });
       });
     });
 
@@ -96,7 +96,7 @@ describe('PracticeWindow', () => {
       beforeEach(() => {
         props.windowState = {
           case: 'list',
-          data: ['someData'],
+          data: { word: 'someData', url: ['No Img Available'] },
         };
         mountedPracticeWindow = testWrapper(PracticeWindow, props);
       });
@@ -110,7 +110,7 @@ describe('PracticeWindow', () => {
       it('passes `data` key reference to the ExerciseSettingsPanel component', () => {
         const panelComponent = mountedPracticeWindow
           .find('ExerciseSettingsPanel');
-        expect(panelComponent.props().data).toEqual(['someData']);
+        expect(panelComponent.props().data).toEqual(props.windowState.data);
       });
     });
   });
