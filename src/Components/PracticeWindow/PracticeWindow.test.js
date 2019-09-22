@@ -45,7 +45,15 @@ describe('PracticeWindow', () => {
       document.addEventListener = jest.fn((event, cb) => {
         map[event] = cb;
       });
-
+      const wrapper = mount(
+        <div>
+          <div id="ciao" />
+          <PracticeWindow {...props} />
+        </div>,
+      );
+      map.mousedown({
+        target: ReactDOM.findDOMNode(wrapper.find('#ciao').instance()),
+      });
       expect(props.closeExerciseWindow).toHaveBeenCalled();
     });
 
@@ -55,19 +63,10 @@ describe('PracticeWindow', () => {
       document.addEventListener = jest.fn((event, cb) => {
         map[event] = cb;
       });
-      const props = {
-        windowState: {
-          case: 'flashcard',
-          data: { word: 'someData', url: ['No Img Available'] },
-        },
-        closeExerciseWindow: jest.fn(),
-      };
       const wrapper = mount(<PracticeWindow {...props} />);
       map.mousedown({
-        // eslint-disable-next-line react/no-find-dom-node
         target: ReactDOM.findDOMNode(wrapper.instance()),
       });
-
       expect(props.closeExerciseWindow).not.toHaveBeenCalled();
     });
 

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Flashcard matches to snapshot 1`] = `
+<div
+  className="flashcard_container"
+>
+  <h3
+    className="flashcard_title"
+  >
+    (no word)
+  </h3>
+  <div
+    className="flashcard_imgContainer"
+  >
+    <img
+      alt="no Word Preview"
+      className="flashcard_img"
+      src={
+        Object {
+          "ReactComponent": Object {
+            "$$typeof": Symbol(react.forward_ref),
+            "render": [Function],
+          },
+          "__esModule": true,
+          "default": "no_img.svg",
+        }
+      }
+    />
+  </div>
+</div>
+`;

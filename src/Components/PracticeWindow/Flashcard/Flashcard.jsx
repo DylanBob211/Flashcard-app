@@ -6,27 +6,18 @@ const NO_IMG = require('../../../Assets/imgs/no_img.svg');
 const Flashcard = ({ data }) => {
   const { word, url } = data;
 
-  console.log(data);
-
-
-  const renderImg = () => {
-    if (url[0] === 'No Img Available' || url[0] === '') {
-      return <img className="wordPreview_img--small" src={NO_IMG} alt="no Word Preview" />;
-    }
-    return (
-      <div className="wordPreview_imgContainer">
-        {url.map((itemUrl, ind) => (<img key={`${ind}-${itemUrl}`} className="wordPreview_img--small" src={itemUrl} alt="preview of pictures about this word" />))}
-      </div>
-    );
-  };
+  const isImgAvailable = (url[0] === 'No Img Available' || url[0] === '');
+  const renderImages = (url.map((item, ind) => (<img key={ind} className="flashcard_img--small" src={item} alt="" />)));
+  const renderNoImage = (<img className="flashcard_img" src={NO_IMG} alt="no Word Preview" />);
 
   return (
-    <>
-      <h3 className="wordPreview_title">{ word }</h3>
-      {renderImg()}
-    </>
+    <div className="flashcard_container">
+      <h3 className="flashcard_title">{ word }</h3>
+      <div className="flashcard_imgContainer">
+        {isImgAvailable ? renderNoImage : renderImages}
+      </div>
+    </div>
   );
-
 };
 
 Flashcard.propTypes = {
