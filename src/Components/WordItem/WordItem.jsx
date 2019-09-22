@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './WordItem.css';
 import FlashcardPreview from './FlashcardPreview/FlashcardPreview';
@@ -8,22 +8,31 @@ const WordItem = ({
   wordItem, deleteWord, wordId, openFlashcard,
 }) => {
   const [isMouseOver, setMouseOver] = useState(false);
-  const handleMouseOver = () => {
-    setMouseOver(!isMouseOver);
-  };
   const handleDeleteClick = (e) => {
     e.stopPropagation();
     deleteWord(wordItem.word, wordId);
   };
 
+  let animID;
+
+  const handleMouseOver = () => {
+    animID = setTimeout(() => setMouseOver(true), 1000);
+  };
+
+  const handleMouseOut = () => {
+    if (animID) {
+      clearTimeout(animID);
+    }
+    setMouseOver(false);
+  };
   return (
     <div
       role="button"
       tabIndex={0}
-      onMouseOver={e => handleMouseOver(e)}
-      onFocus={e => handleMouseOver(e)}
-      onMouseOut={e => handleMouseOver(e)}
-      onBlur={e => handleMouseOver(e)}
+      onMouseOver={handleMouseOver}
+      onFocus={handleMouseOver}
+      onMouseOut={handleMouseOut}
+      onBlur={handleMouseOut}
       onClick={() => openFlashcard(wordItem)}
       onKeyPress={() => openFlashcard(wordItem)}
     >
