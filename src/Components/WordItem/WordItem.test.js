@@ -67,9 +67,15 @@ describe('WordItem', () => {
         mountedWordItem.simulate('mouseover');
       });
 
-      it('renders FlashcardPreview', () => {
+      it('renders FlashcardPreview after one second', (done) => {
         const flashcardPreview = mountedWordItem.find('FlashcardPreview');
-        expect(flashcardPreview.exists()).toEqual(true);
+        expect(flashcardPreview.exists()).toEqual(false);
+
+        setTimeout(() => {
+          const flashcardPreview = mountedWordItem.find('FlashcardPreview');
+          expect(flashcardPreview.exists()).toEqual(true);
+          done();
+        }, 1001);
       });
 
       it('stops rendering FlashcardPreview when mouse is out', () => {

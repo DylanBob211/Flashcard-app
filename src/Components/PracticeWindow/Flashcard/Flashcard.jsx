@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Flashcard.css';
 
 const NO_IMG = require('../../../Assets/imgs/no_img.svg');
 
