@@ -72,6 +72,7 @@ describe('WordItem', () => {
         expect(flashcardPreview.exists()).toEqual(false);
 
         setTimeout(() => {
+          mountedWordItem.update();
           const flashcardPreview = mountedWordItem.find('FlashcardPreview');
           expect(flashcardPreview.exists()).toEqual(true);
           done();
