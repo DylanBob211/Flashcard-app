@@ -24,4 +24,4 @@ Now you can run the development server from the client
 To use the APIs run the node server
 - `node Flashcard-app-backend/server.js`
 
-I'm going to invent another way more practical way or instructions to install that app, but for now that's all I have.
+I'm going to invent another more practical way to install that app, but for now that's all I have.
