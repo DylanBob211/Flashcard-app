@@ -4,7 +4,6 @@ export default axios => async (keyword) => {
     const response = await axios.post('http://localhost:5000/searchphoto', {
       data: keyword
     });
-    console.log(response)
     return response.data.results;
   } catch (e) {
     return { msg: e.message };
