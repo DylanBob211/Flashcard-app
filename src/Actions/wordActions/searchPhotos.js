@@ -1,8 +1,4 @@
-import Unsplash from 'unsplash-js';
+import axios from 'axios';
 import searchPhotosFactory from './searchPhotos.factory';
 
-const unsplash = new Unsplash({
-  applicationId: 'YOUR_API_KEY',
-});
-
-export default searchPhotosFactory(unsplash);
+export default searchPhotosFactory(axios);
