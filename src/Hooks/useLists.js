@@ -6,7 +6,7 @@ import addWordToListDependent from '../Actions/wordActions/addWordToList';
 import deleteWordDependent from '../Actions/wordActions/deleteWord';
 
 const useLists = () => {
-  const [lists, setLists] = useState(initialState);
+  const [lists, setLists] = useState([]);
 
   const addNewList = addNewListDependent(setLists);
   const deleteList = deleteNewListDependent(setLists);

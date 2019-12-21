@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import initialState from '../Components/initialState';
 import useLists from '../Hooks/useLists';
 
-const ListContext = React.createContext([initialState, () => {}]);
+const ListContext = React.createContext([[], () => {}]);
 
 export const useListContext = () => useContext(ListContext);
 
