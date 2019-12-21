@@ -144,6 +144,5 @@ describe('ListItem', () => {
       const curried = openFlashcard(listId);
       expect(wordItem.first().props().openFlashcard).toEqual(curried);
     });
-
   });
 });

@@ -159,7 +159,7 @@ describe('Logger', () => {
       const startButton = mountedLoggerComponent
         .find('[data-test="secondLoggerScreenNextButton"]');
       startButton.simulate('click');
-      
+
       expect(mountedLoggerComponent.contains(<div data-test="redirect" />)).toEqual(true);
     });
   });

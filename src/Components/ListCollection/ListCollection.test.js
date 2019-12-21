@@ -102,7 +102,7 @@ describe('ListCollection', () => {
     it('renders a ListItem component', () => {
       expect(listItem.exists()).toEqual(true);
     });
-  
+
     it('renders a ListItem component for each "list object" in the prop "lists"', () => {
       expect(listItem).toHaveLength(2);
     });

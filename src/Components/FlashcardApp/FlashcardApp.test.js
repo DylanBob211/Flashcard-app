@@ -5,8 +5,8 @@ import FlashcardApp from './FlashcardApp';
 
 describe('FlashcardApp', () => {
   let mountedFlashcardAppComponent;
-  let props = {
-    languages: { from: '', to: '' }
+  const props = {
+    languages: { from: '', to: '' },
   };
 
   const useErrorMock = jest.spyOn(ErrorContext, 'useErrorContext');
